@@ -2,6 +2,7 @@ from django.contrib import messages
 from django.contrib.auth import authenticate, login, logout
 from django.core.urlresolvers import reverse
 from django.shortcuts import redirect, render
+from .forms import UserForm
 
 
 # Create your views here.
@@ -12,7 +13,6 @@ def user_login(request):
         user = authenticate(username=username, password=password)
         if user is not None and user.is_active:
             login(request, user)
-            # ratings = user.rater.rating_set.all().order_by('-stars')
             return redirect(reverse('user_detail', args=[user.rater.pk]))
         else:
             return render(request,
@@ -28,8 +28,8 @@ def user_register(request):
         form = UserForm(request.POST)
 
         if form.is_valid():
-            user = user_form.save()
-            password = user_form['password']
+            user = form.save()
+            password = form['password']
             user.set_password(password)
             user.save()
 
