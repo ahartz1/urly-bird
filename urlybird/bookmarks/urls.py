@@ -4,5 +4,7 @@ from . import views as bviews
 
 
 urlpatterns = [
-    url(r'^worms/$', ),
+    # url(r'^worms/(?P<pk>\w+)$', ),
+    # url(r'^birds/$', ),
+    # url(r'^clicks/$', ),
 ]
