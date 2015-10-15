@@ -1,0 +1,13 @@
+{% extends "base.html" %}
+{% block title %}User Registration{% endblock %}
+
+{% block content %}
+  <h2>Register</h2>
+
+  <form method="POST" action="{% url 'user_register' %}">
+    {% csrf_token %}
+    {{ user_form.as_p }}
+    {{ rater_form.as_p }}
+    <input type="submit" value="Register" class="btn btn-default">
+  </form>
+{% endblock %}
