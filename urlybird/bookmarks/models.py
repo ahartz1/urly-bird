@@ -9,7 +9,14 @@ class Worm(models.Model):
     slink = models.CharField(max_length=200)  # short url
     user = models.ForeignKey(User)
     timestamp = models.DateTimeField()
-    winfo = models.CharField(max_length=255)
+    wtitle = models.CharField(max_length=100)
+    winfo = models.CharField(max_length=255, null=True, blank=True)
+    numclicks = models.PositiveIntegerField(null=True, blank=True)
+
+    def save(self):
+        # super(Worm, self).save()
+        self.numclicks = self.click_set.all().count()
+        super(Worm, self).save()
 
 
 class Click(models.Models):
