@@ -7,7 +7,7 @@ from .models import Worm
 
 class BirdIndexView(generic.ListView):
     template_name = 'bookmarks/bird_detail.html'
-    context_object_name = 'all_worms'
+    context_object_name = 'bird_detail'
     paginate_by = 25
 
     def get_queryset(self):
@@ -16,7 +16,7 @@ class BirdIndexView(generic.ListView):
 
 class WormIndexView(generic.ListView):
     template_name = 'bookmarks/top_click.html'
-    context_object_name = 'bird_worms'
+    context_object_name = 'top_click'
     paginate_by = 25
 
     def get_queryset(self):
