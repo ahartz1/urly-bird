@@ -15,7 +15,7 @@ Including another URLconf
 """
 from django.conf.urls import include, url
 from django.contrib import admin
-from bookmarks import urls as burls
+from bookmarks import urls as bookmark_urls
 from bookmarks import views as bviews
 
 
@@ -24,5 +24,5 @@ urlpatterns = [
     url(r'^login$', bviews.user_login, name='user_login'),
     url(r'^logout$', bviews.user_logout, name='user_logout'),
     url(r'^register$', bviews.user_register, name='user_register'),
-    url(r'', include(burls.urls)),
+    url(r'', include(bookmark_urls)),
 ]
