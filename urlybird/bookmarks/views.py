@@ -2,7 +2,7 @@ from django.contrib import messages
 from django.contrib.auth import authenticate, login, logout
 from django.core.urlresolvers import reverse
 from django.shortcuts import redirect, render, get_object_or_404
-from urlybird.forms import UserForm#, WormForm
+from urlybird.forms import UserForm, WormForm
 from django.views import generic
 from .models import Worm
 from django.contrib.auth.models import User
@@ -18,7 +18,7 @@ class WormListView(generic.ListView):
     paginate_by = 25
 
     def get_queryset(self):
-        # self.form = WormForm()
+        self.form = WormForm()
         return Worm.objects.all().order_by('-timestamp')
 
 
@@ -28,7 +28,7 @@ class BirdListView(generic.ListView):
     paginate_by = 25
 
     def get_queryset(self):
-        # self.form = WormForm()
+        self.form = WormForm()
         # user = User.objects.get(pk=user.pk)
 
         user = get_object_or_404(User, pk=self.kwargs['pk'])
