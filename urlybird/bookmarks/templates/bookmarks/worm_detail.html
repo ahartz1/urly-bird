@@ -1,1 +1,20 @@
+{% extends "base.html" %}
 
+{% block content %}
+
+<body>
+
+<h2> Worm Details</h2>
+
+<p>Title: {{ worm.wtitle }} <br>
+  Worm: {{worm.slink}} <br>
+  Description: {{ worm.winfo }} <br>
+  Full link: {{worm.slink}} <br>
+  <small> {{worm.timestamp}} - {{worm.timestamp | timesince}} ago </small> <br>
+
+
+</p>
+
+
+
+{% endblock %}

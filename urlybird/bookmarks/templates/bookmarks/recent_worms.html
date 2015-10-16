@@ -4,11 +4,11 @@
 
 <body>
 
-<h2>All Worms</h2>
+<h2>Recent Worms</h2>
 
 
 {% for worm in worms %}
-  <p><a href="{{worm.slink}}">{{worm.slink}}</a> {{ worm.wtitle }}-{{worm.timestamp}} </p>
+  <p><a href{% url 'worm_detail' worm.pk %}">{{worm.slink}}</a> {{ worm.wtitle }}-{{worm.timestamp}} </p>
 {% endfor %}
 
 
