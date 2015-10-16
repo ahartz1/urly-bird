@@ -8,6 +8,30 @@ from .models import Worm
 
 
 # Create your views here.
+
+class WormListView(generic.ListView):
+    template_name = 'bookmarks/recent_worms.html'
+    context_object_name = 'worms'
+    paginate_by = 25
+
+    def get_queryset(self):
+        return Worm.objects.all().order_by('-timestamp')
+
+
+class BirdListView(generic.ListView):
+    template_name = 'bookmarks/bird_detail.html'
+    context_object_name = 'birds'
+    paginate_by = 25
+
+    def get_queryset(self):
+        return self.user.worm_set.all().order_by('-timestamp')
+
+
+class WormDetailView(generic.DetailView):
+    model = Worm
+    template = 'bookmarks/worm_detail.html'
+
+
 def user_login(request):
     if request.method == 'POST':
         username = request.POST['username']
@@ -17,10 +41,10 @@ def user_login(request):
             login(request, user)
             return redirect(reverse('user_detail', args=[user.pk]))
         else:
+            messages.add_message(request, messages.ERROR, 'ERROR LOGGING IN!')
             return render(request,
                           'bookmarks/user_login.html',
-                          {'error_message': "ERROR LOGGING IN!",
-                           'username': username})
+                          {'username': username})
     else:
         return render(request, 'bookmarks/user_login.html')
 
@@ -59,26 +83,3 @@ def user_logout(request):
                       {'user_name': user_name})
     else:
         return redirect('/')
-
-
-class WormListView(generic.ListView):
-    template_name = 'bookmarks/recent_worms.html'
-    context_object_name = 'worms'
-    paginate_by = 25
-
-    def get_queryset(self):
-        return Worm.objects.all().order_by('-timestamp')
-
-
-class BirdListView(generic.ListView):
-    template_name = 'bookmarks/bird_detail.html'
-    context_object_name = 'birds'
-    paginate_by = 25
-
-    def get_queryset(self):
-        return self.user.worm_set.all().order_by('-timestamp')
-
-
-class WormDetailView(generic.DetailView):
-    model = Worm
-    template = 'bookmarks/worm_detail.html'
