@@ -23,7 +23,6 @@ class Command(BaseCommand):
                 except:
                     continue
 
-
         # 2. Make some fake worms, then create a json from them
         worm_data = []
 
@@ -31,32 +30,18 @@ class Command(BaseCommand):
             worm = {
                 'model': 'bookmarks.Worm',
                 'fields': {
+                    'user': random.choice(User.objects.all()),
                     'flink': fake.,
-                    'gender': row['Gender'],
-                    'occupation': row['Occupation'],
-                    'zipcode': row['Zip-code'],
+                    'slink': fake.,
+                    'timestamp': fake.,
+                    'wtitle': fake.,
+                    'winfo': fake.,
                 },
             }
             worm_data.append(user)
 
         with open('bookmarks/fixtures/worms.json', 'w') as f:
             f.write(json.dumps(worm_data))
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 
 #
