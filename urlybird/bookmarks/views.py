@@ -1,6 +1,6 @@
 from django.shortcuts import render
 from django.views import generic
-from .models import Worm, Click
+from .models import Worm
 
 # Create your views here.
 
@@ -16,7 +16,7 @@ class BirdIndexView(generic.ListView):
 
 class WormIndexView(generic.ListView):
     template_name = 'bookmarks/top_click.html'
-    context_object_name = 'all_worms'
+    context_object_name = 'bird_worms'
     paginate_by = 25
 
     def get_queryset(self):
