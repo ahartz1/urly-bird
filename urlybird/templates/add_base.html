@@ -2,7 +2,7 @@
 {% block add_worm %}
 <form method="POST" action="{% url 'add_worm' %}?next={{request.path}}">
   {% csrf_token %}
-  {{ form.as_p }}
+  {{ view.form.as_p }}
   <input type="submit" value="Shorten it!" class="btn btn-default">
 </form>
 {% endblock %}
