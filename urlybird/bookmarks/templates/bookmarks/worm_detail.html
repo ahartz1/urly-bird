@@ -6,11 +6,11 @@
 
 <h2> Worm Details</h2>
 
-<p>{{ worm.wtitle }} <br>
+<p>Title: {{ worm.wtitle }} <br>
   Worm: {{worm.slink}} <br>
   Description: {{ worm.winfo }} <br>
   Full link: {{worm.slink}} <br>
-  {{worm.timestamp}} - {{worm.timestamp | timesince}} ago <br>
+  <small> {{worm.timestamp}} - {{worm.timestamp | timesince}} ago </small> <br>
 
 
 </p>

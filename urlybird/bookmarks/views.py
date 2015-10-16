@@ -18,7 +18,7 @@ class WormListView(generic.ListView):
     paginate_by = 25
 
     def get_queryset(self):
-        self.form = WormForm()
+        # self.form = WormForm()
         return Worm.objects.all().order_by('-timestamp')
 
 
@@ -28,7 +28,7 @@ class BirdListView(generic.ListView):
     paginate_by = 25
 
     def get_queryset(self):
-        self.form = WormForm()
+        # self.form = WormForm()
         # user = User.objects.get(pk=user.pk)
 
         user = get_object_or_404(User, pk=self.kwargs['pk'])
