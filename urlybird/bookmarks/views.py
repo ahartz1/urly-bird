@@ -56,6 +56,10 @@ def add_worm(request):
     return redirect(request.path)
 
 
+def edit_worm(request):
+    pass
+
+
 def user_login(request):
     if request.method == 'POST':
         username = request.POST['username']
