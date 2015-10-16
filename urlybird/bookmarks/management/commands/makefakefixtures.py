@@ -30,15 +30,15 @@ class Command(BaseCommand):
             worm = {
                 'model': 'bookmarks.Worm',
                 'fields': {
-                    'user': random.choice(User.objects.all()),
-                    'flink': fake.,
-                    'slink': fake.,
-                    'timestamp': fake.,
-                    'wtitle': fake.,
-                    'winfo': fake.,
+                    'user': choice(User.objects.all()),
+                    'flink': fake.image_url(),
+                    'slink': fake.password(length=6, special_chars=False),
+                    'timestamp': fake.date_time_this_year(),
+                    'wtitle': fake.lorem(max_nb_chars=100),
+                    'winfo': fake.lorem(max_nb_chars=255),
                 },
             }
-            worm_data.append(user)
+            worm_data.append(worm)
 
         with open('bookmarks/fixtures/worms.json', 'w') as f:
             f.write(json.dumps(worm_data))
