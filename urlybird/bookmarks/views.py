@@ -13,14 +13,14 @@ def user_login(request):
         user = authenticate(username=username, password=password)
         if user is not None and user.is_active:
             login(request, user)
-            return redirect(reverse('user_detail', args=[user.rater.pk]))
+            return redirect(reverse('user_detail', args=[user.pk]))
         else:
             return render(request,
-                          'lensview/user_login.html',
+                          'bookmarks/user_login.html',
                           {'error_message': "ERROR LOGGING IN!",
                            'username': username})
     else:
-        return render(request, 'lensview/user_login.html')
+        return render(request, 'bookmarks/user_login.html')
 
 
 def user_register(request):
