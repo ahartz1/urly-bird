@@ -37,6 +37,9 @@ INSTALLED_APPS = (
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+    'bootstrap3',
+    'bootstrap_themes',
+    'debug_toolbar',  # comment this out if you don't want a debug toolbar
     'bookmarks',
 )
 
