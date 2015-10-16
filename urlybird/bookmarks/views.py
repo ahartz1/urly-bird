@@ -1,14 +1,13 @@
 from datetime import datetime
 from django.contrib import messages
 from django.contrib.auth import authenticate, login, logout
+from django.contrib.auth.models import User
 from django.core.urlresolvers import reverse
 from django.shortcuts import redirect, render, get_object_or_404
 from urlybird.forms import UserForm, WormForm
 from django.views import generic
 from .models import Worm
-from django.contrib.auth.models import User
-
-import pdb
+from faker import Faker
 
 
 # Create your views here.
@@ -30,11 +29,8 @@ class BirdListView(generic.ListView):
 
     def get_queryset(self):
         self.form = WormForm()
-        # user = User.objects.get(pk=user.pk)
-
-        user = get_object_or_404(User, pk=self.kwargs['pk'])
-
-        return user.worm_set.all().order_by('-timestamp')
+        self.user = get_object_or_404(User, pk=self.kwargs['pk'])
+        return self.user.worm_set.all().order_by('-timestamp')
 
 
 class WormDetailView(generic.DetailView):
@@ -49,6 +45,14 @@ def add_worm(request):
             worm = form.save(commit=False)
             if request.user.is_authenticated():
                 worm.user = request.user
+            fake = Faker()
+            while True:
+                slink = fake.password(length=7, special_chars=False)
+                if len(Worm.objects.filter(slink=slink)) == 0:
+                    worm.slink = slink
+                    worm.save()
+                    break
+                continue
             worm.timestamp = datetime.now()
             worm.save()
             # TODO: figure out way to store where they came from: query string
@@ -62,7 +66,7 @@ def add_worm(request):
         messages.add_message(request,
                              messages.ERROR,
                              'Stop trying to hack this site!')
-    return redirect(request.path)
+    return redirect(request.next)
 
 
 def edit_worm(request):

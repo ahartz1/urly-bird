@@ -1,10 +1,10 @@
-{% extends "base.html" %}
+{% extends "add_base.html" %}
 {% load bootstrap3 %}
 {% block content %}
 
 <body>
 
-<h2>{{ user.username }}Worms</h2>
+<h2>{{ view.user.username }} Worms</h2>
 
 
 {% for worm in worms %}

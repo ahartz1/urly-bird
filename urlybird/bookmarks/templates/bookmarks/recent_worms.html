@@ -1,4 +1,4 @@
-{% extends "base.html" %}
+{% extends "add_base.html" %}
 {% load bootstrap3 %}
 {% block content %}
 
@@ -8,7 +8,7 @@
 
 
 {% for worm in worms %}
-  <p><a href{% url 'worm_detail' worm.pk %}">{{worm.slink}}</a> {{ worm.wtitle }}-{{worm.timestamp}} </p>
+  <p><a href="{% url 'worm_detail' worm.pk %}">{{worm.slink}}</a> {{ worm.wtitle }}-{{worm.timestamp}} </p>
 {% endfor %}
 
 
