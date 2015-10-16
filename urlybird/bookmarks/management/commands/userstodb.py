@@ -10,7 +10,7 @@ class Command(BaseCommand):
         # 1. Make some fake users
         fake = Faker()
 
-        for _ in range(8000):
+        for _ in range(800):
             while True:
                 fake_username = fake.user_name() + \
                     choice(list('0123456789'))
