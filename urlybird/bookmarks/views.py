@@ -5,18 +5,18 @@ from .models import Worm
 # Create your views here.
 
 
-class BirdIndexView(generic.ListView):
-    template_name = 'bookmarks/bird_detail.html'
-    context_object_name = 'bird_detail'
+class WormListView(generic.ListView):
+    template_name = 'bookmarks/recent_worms.html'
+    context_object_name = 'worms'
     paginate_by = 25
 
     def get_queryset(self):
         return Worm.objects.all().order_by('-timestamp')
 
 
-class WormIndexView(generic.ListView):
-    template_name = 'bookmarks/top_click.html'
-    context_object_name = 'top_click'
+class BirdListView(generic.ListView):
+    template_name = 'bookmarks/bird_detail.html'
+    context_object_name = 'birds'
     paginate_by = 25
 
     def get_queryset(self):
