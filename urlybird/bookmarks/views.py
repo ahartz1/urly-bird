@@ -39,7 +39,7 @@ def user_login(request):
         user = authenticate(username=username, password=password)
         if user is not None and user.is_active:
             login(request, user)
-            return redirect(reverse('user_detail', args=[user.pk]))
+            return redirect(reverse('bird_detail', args=[user.pk]))
         else:
             messages.add_message(request, messages.ERROR, 'ERROR LOGGING IN!')
             return render(request,
@@ -64,11 +64,11 @@ def user_register(request):
             messages.add_message(request,
                                  messages.SUCCESS,
                                  'Your account was successfully created.')
-            return redirect('home')
+            return redirect('user_login')
     else:
         form = UserForm()
     return render(request,
-                  'lensview/user_register.html',
+                  'bookmarks/user_register.html',
                   {'form': form})
 
 
@@ -79,7 +79,7 @@ def user_logout(request):
         messages.add_message(request, messages.SUCCESS,
                              "You have successfully logged out")
         return render(request,
-                      'lensview/user_logout.html',
+                      'bookmarks/user_logout.html',
                       {'user_name': user_name})
     else:
         return redirect('/')

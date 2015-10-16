@@ -41,10 +41,10 @@
 
       <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-2">
         <ul class="nav navbar-nav navbar-right">
-          {% comment %}
           <li role=presentation>
             <a href="{% url 'recent_worms' %}">Top Worms</a>
           </li>
+          {% comment %}
           {% if user.is_authenticated %}
           <li role="presentation">
             <a href="{% url 'bird_detail' user.pk %}">{{ user.username }}</a>
@@ -53,14 +53,14 @@
           <li role="presentation">
             <a href="{% url 'user_logout' %}">Logout</a>
           </li>
-          {% else %}
+
           <li role="presentation">
             <a href="{% url 'user_login' %}">Login</a>
           </li>
           <li role="presentation">
             <a href="{% url 'user_register' %}">Register</a>
           </li>
-        {% endif %}
+
         </ul>
       </div>
     </div>
