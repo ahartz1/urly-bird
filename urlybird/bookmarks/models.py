@@ -7,7 +7,7 @@ from django.db import models
 
 class Worm(models.Model):
     flink = models.TextField(max_length=2000)  # full url
-    slink = models.CharField(max_length=200)  # short url
+    slink = models.CharField(max_length=7)  # short url
     user = models.ForeignKey(User)
     timestamp = models.DateTimeField()
     wtitle = models.CharField(max_length=100)

@@ -26,7 +26,10 @@
           <span class="icon-bar"></span>
           <span class="icon-bar"></span>
         </button>
-        <a class="navbar-brand" href="{% url 'top_worms' %}">URLy Bird</a>
+        {% comment %}
+        <a class="navbar-brand" href="{% url 'recent_worms' %}">URLy Bird</a>
+        {% endcomment %}
+        <a class="navbar-brand" href="#">URLy Bird</a>
       </div>
 
       <!-- <form class="navbar-form navbar-left" role="search">
@@ -38,13 +41,15 @@
 
       <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-2">
         <ul class="nav navbar-nav navbar-right">
+          {% comment %}
           <li role=presentation>
-            <a href="{% url 'top_worms' %}">Top Worms</a>
+            <a href="{% url 'recent_worms' %}">Top Worms</a>
           </li>
           {% if user.is_authenticated %}
           <li role="presentation">
             <a href="{% url 'bird_detail' user.pk %}">{{ user.username }}</a>
           </li>
+          {% endcomment %}
           <li role="presentation">
             <a href="{% url 'user_logout' %}">Logout</a>
           </li>
