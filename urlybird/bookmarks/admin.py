@@ -1,6 +1,7 @@
 from django.contrib import admin
 from .models import Worm, Click
 
+
 class WormAdmin(admin.ModelAdmin):
     list_display = ['flink', 'slink', 'user', 'timestamp', 'wtitle', 'winfo', 'numclicks']
 
