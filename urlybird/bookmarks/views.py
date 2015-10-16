@@ -20,7 +20,7 @@ class BirdListView(generic.ListView):
     paginate_by = 25
 
     def get_queryset(self):
-        return self.user.rating_set.all().order_by('-timestamp')
+        return self.user.worm_set.all().order_by('-timestamp')
 
 
 class WormDetailView(generic.DetailView):
