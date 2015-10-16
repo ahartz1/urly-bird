@@ -1,8 +1,9 @@
+from datetime import datetime
 from django.contrib import messages
 from django.contrib.auth import authenticate, login, logout
 from django.core.urlresolvers import reverse
 from django.shortcuts import redirect, render
-from urlybird.forms import UserForm
+from urlybird.forms import UserForm, WormForm
 from django.views import generic
 from .models import Worm
 
@@ -30,6 +31,29 @@ class BirdListView(generic.ListView):
 class WormDetailView(generic.DetailView):
     model = Worm
     template = 'bookmarks/worm_detail.html'
+
+
+def add_worm(request):
+    if request.method == 'POST':
+        form = WormForm(request.POST)
+        if form.is_valid():
+            worm = form.save(commit=False)
+            if request.user.is_authenticated():
+                worm.user = request.user
+            worm.timestamp = datetime.now()
+            worm.save()
+            # TODO: figure out way to store where they came from: query string
+            # ?next={{request.path}}
+        else:
+            messages.add_message(request,
+                                 messages.ERROR,
+                                 'Form data invalid, please see restrictions '
+                                 'by field')
+    else:
+        messages.add_message(request,
+                             messages.ERROR,
+                             'Stop trying to hack this site!')
+    return redirect(request.path)
 
 
 def user_login(request):

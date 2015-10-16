@@ -42,7 +42,7 @@
       <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-2">
         <ul class="nav navbar-nav navbar-right">
           <li role=presentation>
-            <a href="{% url 'recent_worms' %}">Top Worms</a>
+            <a href="{% url 'recent_worms' %}">Recent Worms</a>
           </li>
           {% comment %}
           {% if user.is_authenticated %}
@@ -67,6 +67,9 @@
   </nav>
   <div class="container">
     {% bootstrap_messages %}
+    <div id="add-worm">
+      {% block add_worm %}{% endblock %}
+    </div>
     <div id="content">
       {% block content %}{% endblock %}
     </div>
