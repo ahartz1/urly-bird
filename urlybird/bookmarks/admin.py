@@ -6,7 +6,7 @@ class WormAdmin(admin.ModelAdmin):
 
 
 class ClickAdmin(admin.ModelAdmin):
-    list_display = ['user', 'worm', 'timestamps']
+    list_display = ['user', 'worm', 'timestamp']
 
 # Register your models here.
 

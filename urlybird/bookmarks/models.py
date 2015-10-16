@@ -19,7 +19,7 @@ class Worm(models.Model):
         super(Worm, self).save()
 
 
-class Click(models.Models):
+class Click(models.Model):
     user = models.ForeignKey(User, null=True, blank=True)
     worm = models.ForeignKey(Worm)
     timestamp = models.DateTimeField()

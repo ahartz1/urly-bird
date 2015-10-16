@@ -6,7 +6,7 @@ from .models import Worm, Click
 
 
 class BirdIndexView(generic.ListView):
-    template_name = 'bookmarks/all_worms.html'
+    template_name = 'bookmarks/bird_detail.html'
     context_object_name = 'all_worms'
     paginate_by = 25
 
@@ -15,7 +15,7 @@ class BirdIndexView(generic.ListView):
 
 
 class WormIndexView(generic.ListView):
-    template_name = 'bookmarks/bird_detail.html'
+    template_name = 'bookmarks/top_click.html'
     context_object_name = 'all_worms'
     paginate_by = 25
 
