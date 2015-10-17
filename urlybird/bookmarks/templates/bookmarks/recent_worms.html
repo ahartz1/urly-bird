@@ -6,14 +6,29 @@
 
 <h2>Recent Worms</h2>
 
-
+<table class="table table-striped">
+<tr>
+  <th>Inch Worm</th>
+  <th>Title</th>
+  <th>Bird</th>
+  <th>Date</th>
+  <th></th>
+</tr>
 {% for worm in worms %}
-  <p><a href="{% url 'redirect_slink' worm.slink %}">{{worm.slink}}</a> {{ worm.wtitle }} -
-    <small>{{worm.timestamp}}
-    <a href="{% url 'worm_detail' worm.pk %}"><span class="glyphicon glyphicon-info-sign">
-    </a></span></small> </p>
+  <tr>
+    <td><b><a href="{% url 'redirect_slink' worm.slink %}">{{ worm.slink }}</a></b></td>
+    <td>{{ worm.wtitle|truncatechars:50 }}</td>
+    {% if worm.user %}
+      <td><a href="{% url 'bird_detail' worm.user.pk %}">{{ worm.user }}</a></td>
+    {% else %}
+      <td>anonymous</td>
+    {% endif %}
+    <td><small>{{ worm.timestamp }} ({{ worm.timestamp | timesince }} ago)</small></td>
+    <td><a href="{% url 'worm_detail' worm.pk %}"><span class="glyphicon glyphicon-info-sign">
+    </span></a></td>
+  </tr>
 {% endfor %}
-
+</table>
 
 {% bootstrap_pagination page_obj pages_to_show=5%}
 {% endblock %}
