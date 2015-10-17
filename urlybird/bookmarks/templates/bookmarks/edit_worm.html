@@ -4,7 +4,7 @@
 {% block content %}
 <h1>Edit Worm</h1>
 
-<form method="POST" action="{% url 'edit_worm' worm.pk %}">
+<form method="POST" action="{% url 'edit_worm' worm_id %}">
   {% csrf_token %}
   {{ form.as_p }}
   <input type="submit" value="Submit Edit">
