@@ -3,13 +3,13 @@ from . import views as bviews
 
 
 urlpatterns = [
-    url(r'^worms/(?P<pk>\d+)$',
-        bviews.WormDetailView.as_view(),
-        name='worm_detail'),
-
     # url(r'^worms/(?P<pk>\d+)$',
-    #     bviews.ClickListView.as_view(),
-    #     name='click_list'),
+    #     bviews.WormDetailView.as_view(),
+    #     name='worm_detail'),
+
+    url(r'^worms/(?P<pk>\d+)$',
+        bviews.ClickListView.as_view(),
+        name='click_list'),
 
     url(r'^worms/add$', bviews.add_worm, name='add_worm'),
 
