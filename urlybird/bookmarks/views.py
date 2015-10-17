@@ -137,4 +137,25 @@ def delete_worm(request, worm_id):
 
 @login_required
 def edit_worm(request, worm_id):
-    pass
+    worm = get_object_or_404(Worm, pk=worm_id)
+    flink = worm.flink
+    wtitle = worm.wtitle
+    winfo = worm.winfo
+    if request.method == 'GET':
+        form = WormForm(instance=worm)
+    elif request.method == 'POST':
+        form = WormForm(instance=worm, data=request.POST)
+        if form.is_valid():
+            worm = form.save(commit=False)
+            worm.flink = flink
+            worm.wtitle = wtitle
+            worm.winfo = winfo
+            worm.timestamp = datetime.now()
+            worm.save()
+            messages.add_message(request, messages.SUCCESS,
+                                 'Updated worm')
+    return render(request,
+                  'bookmarks/edit_worm.html',
+                  {'flink': flink,
+                   'wtitle': wtitle,
+                   'form': form})
