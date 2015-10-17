@@ -8,8 +8,8 @@
 
 
 {% for worm in worms %}
-  <p><a href="{{worm.flink}}">{{worm.slink}}</a> {{ worm.wtitle }}-{{worm.timestamp}}
-    <small>
+  <p><a href="{{worm.flink}}">{{worm.slink}}</a> {{ worm.wtitle }} -
+    <small>{{worm.timestamp}}
     <a href="{% url 'worm_detail' worm.pk %}"><span class="glyphicon glyphicon-info-sign">
     </a></span></small> </p>
 {% endfor %}
