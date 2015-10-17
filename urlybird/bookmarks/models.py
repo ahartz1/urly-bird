@@ -19,6 +19,7 @@ class Worm(models.Model):
             self.numclicks = self.click_set.all().count()
         except:
             pass
+        self.flink = self.flink.strip()
         super(Worm, self).save()
 
 

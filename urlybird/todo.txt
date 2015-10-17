@@ -1,8 +1,5 @@
 Unassigned:
 - revise nav bar
-- edit and delete (only when auth user)
-- add info glyph to show worm_details
-- set up url regex and function to link slink to flink
 - my worms / my stats
 
 
@@ -23,15 +20,10 @@ Somewhere: buttons for info, edit, delete
 
 
 Adam:
-- add list of clicks Worm detail view (only for auth user)
 - revise WLV & WDV templates (BLV later)
 
 
 Tyler:
-- edit Worm functionality to BLV
-- delete Worm functionality to BLV
-- edit and delete as icons
-- stab at adding login required to stats_view
 
 
 Completed:
@@ -42,3 +34,10 @@ Completed:
 √ form for adding Worm, add Worm
 √ resize flink text entry box
 √ make add_worm return to last-visited page (query string)
+√ edit Worm functionality to BLV
+√ delete Worm functionality to BLV
+√ edit and delete as icons
+√ stab at adding login required to stats_view (just use if user.is_authenticated)
+√ add info glyph to show worm_details
+√ set up url regex and function to link slink to flink
+√ add list of clicks Worm detail view (only for auth user)
