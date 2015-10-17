@@ -7,7 +7,9 @@
 <h2> Worm Details</h2>
 
 <p>Title: {{ worm.wtitle }} <br>
+  {% if worm.user %}
   User: <a href="{% url 'bird_detail' worm.user_id %}">{{ worm.user.username }}</a> <br>
+  {% endif %}
   Worm: <a href="{{worm.flink}}">{{worm.slink}}</a> <br>
   Description: {{ worm.winfo }} <br>
   Full link: <a href="{{worm.flink}}">{{worm.flink}}</a> <br>

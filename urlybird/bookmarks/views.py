@@ -70,9 +70,7 @@ def add_worm(request):
         messages.add_message(request,
                              messages.ERROR,
                              'Stop trying to hack this site!')
-    if request.user.is_authenticated():
-        return redirect('bird_detail', request.user.pk)
-    return redirect('/')
+    return redirect(request.GET['next'])
 
 
 def user_login(request):
@@ -120,11 +118,8 @@ def user_logout(request):
         user_name = request.user.username
         logout(request)
         messages.add_message(request, messages.SUCCESS,
-                             "You have successfully logged out")
-        return render(request,
-                      'bookmarks/user_logout.html',
-                      {'user_name': user_name})
-    else:
+                             "{}, you have successfully logged out".format(
+                                 user_name))
         return redirect('/')
 
 

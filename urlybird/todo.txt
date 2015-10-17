@@ -15,6 +15,7 @@ Like to have:
   - last 30 days most clicks
   - all time most clicks
 
+
 Layout of tables:
 Top row: slink, wtitle
 Second row: winfo, timestamp
@@ -22,11 +23,9 @@ Somewhere: buttons for info, edit, delete
 
 
 Adam:
-- function to add Worm
 - add list of clicks Worm detail view (only for auth user)
-- form for adding Worm, add Worm
-- resize flink text entry box
 - revise WLV & WDV templates (BLV later)
+
 
 Tyler:
 - edit Worm functionality to BLV
@@ -36,6 +35,10 @@ Tyler:
 
 
 Completed:
-√- send db to Tyler
-√- add_base.html that has form field to add a Worm
-√- first draft of WLV, BLV, WDV templates
+√ send db to Tyler
+√ add_base.html that has form field to add a Worm
+√ first draft of WLV, BLV, WDV templates
+√ function to add Worm
+√ form for adding Worm, add Worm
+√ resize flink text entry box
+√ make add_worm return to last-visited page (query string)

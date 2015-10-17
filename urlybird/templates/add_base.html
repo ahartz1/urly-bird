@@ -1,6 +1,6 @@
 {% extends "base.html" %}
 {% block add_worm %}
-<form method="POST" action="{% url 'add_worm' %}?nextpage={{ request.path }}">
+<form method="POST" action="{% url 'add_worm' %}?next={{ request.path }}">
   {% csrf_token %}
   <p><label for="id_flink">Full link:</label> <textarea cols="85" id="id_flink" maxlength="2000" name="flink" rows="1">
   </textarea></p>
