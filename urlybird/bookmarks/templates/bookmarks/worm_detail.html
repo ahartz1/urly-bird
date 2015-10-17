@@ -13,6 +13,9 @@
   Full link: <a href="{{worm.flink}}">{{worm.flink}}</a> <br>
   <small> {{worm.timestamp}} - {{worm.tiamestamp | timesince}} ago </small> <br>
 
+  <small><a href="{% url 'edit_worm' worm.pk %}"><span class="glyphicon glyphicon-pencil"></span></a> |
+  <a href="{% url 'delete_worm' worm.pk %}"><span class="glyphicon glyphicon-trash"></span></a></small></p>
+
 
 </p>
 

@@ -8,6 +8,7 @@ from urlybird.forms import UserForm, WormForm
 from django.views import generic
 from .models import Worm
 from faker import Faker
+from django.contrib.auth.decorators import login_required
 
 
 # Create your views here.
@@ -69,10 +70,6 @@ def add_worm(request):
     return redirect(request.next)
 
 
-def edit_worm(request):
-    pass
-
-
 def user_login(request):
     if request.method == 'POST':
         username = request.POST['username']
@@ -124,3 +121,20 @@ def user_logout(request):
                       {'user_name': user_name})
     else:
         return redirect('/')
+
+
+@login_required
+def delete_worm(request, worm_id):
+    if Worm.objects.get(pk=worm_id).user == request.user:
+        Worm.objects.get(pk=worm_id).delete()
+        messages.add_message(request, messages.SUCCESS, "Worm removed")
+        return redirect('recent_worms')
+    else:
+        messages.add_message(
+            request, messages.ERROR, "You do not have access")
+        return redirect('recent_worms')
+
+
+@login_required
+def edit_worm(request, worm_id):
+    pass

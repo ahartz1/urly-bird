@@ -13,6 +13,8 @@ urlpatterns = [
         bviews.BirdListView.as_view(),
         name='bird_detail'),
 
+    url(r'^delete/(?P<worm_id>\d+)', bviews.delete_worm, name='delete_worm'),
+    url(r'^edit/(?P<worm_id>\d+)', bviews.edit_worm, name='edit_worm'),
     url(r'^$', bviews.WormListView.as_view(), name='recent_worms'),
 
 ]
