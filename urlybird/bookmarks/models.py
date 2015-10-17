@@ -15,7 +15,11 @@ class Worm(models.Model):
     numclicks = models.PositiveIntegerField(null=True, blank=True)
 
     def save(self):
-        self.numclicks = self.click_set.all().count()
+        try:
+            self.numclicks = self.click_set.all().count()
+        except:
+            pass
+        self.flink = self.flink.strip()
         super(Worm, self).save()
 
 

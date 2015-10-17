@@ -7,7 +7,9 @@
 <h2> Worm Details</h2>
 
 <p>Title: {{ worm.wtitle }} <br>
+  {% if worm.user %}
   User: <a href="{% url 'bird_detail' worm.user_id %}">{{ worm.user.username }}</a> <br>
+  {% endif %}
   Worm: <a href="{{worm.flink}}">{{worm.slink}}</a> <br>
   Description: {{ worm.winfo }} <br>
   Full link: <a href="{{worm.flink}}">{{worm.flink}}</a> <br>
@@ -16,10 +18,23 @@
       <a href="{% url 'edit_worm' worm.pk %}"><span class="glyphicon glyphicon-pencil"></span></a> |
       <a href="{% url 'delete_worm' worm.pk %}"><span class="glyphicon glyphicon-trash"></span></a>
     {% endif %}</small>
-
-
 </p>
-
-
+<br>
+<table class="table table-striped">
+<tr>
+  <th>Click Date</th>
+  <th>User</th>
+</tr>
+{% for click in clicks %}
+  <tr>
+    <td>{{ click.timestamp }} ({{ click.timestamp | timesince }} ago)</td>
+    {% if click.user %}
+    <td><b><a href="{% url 'bird_detail' click.user.pk %}">{{ click.user }}</a></b></td>
+    {% else %}
+    <td>anonymous</td>
+    {% endif %}
+  </tr>
+{% endfor %}
+</table>
 
 {% endblock %}

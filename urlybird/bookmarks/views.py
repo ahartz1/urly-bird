@@ -7,7 +7,7 @@ from django.shortcuts import redirect, render, get_object_or_404
 from django.utils.timezone import make_aware
 from urlybird.forms import UserForm, WormForm
 from django.views import generic
-from .models import Worm
+from .models import Worm, Click
 from faker import Faker
 from django.contrib.auth.decorators import login_required
 
@@ -39,6 +39,12 @@ class WormDetailView(generic.DetailView):
     model = Worm
     template = 'bookmarks/worm_detail.html'
 
+    def get_context_data(self, **kwargs):
+        context = super(WormDetailView, self).get_context_data(**kwargs)
+        worm = Worm.objects.get(pk=self.kwargs['pk'])
+        context['clicks'] = worm.click_set.all().order_by('-timestamp')
+        return context
+
 
 def add_worm(request):
     if request.method == 'POST':
@@ -56,23 +62,27 @@ def add_worm(request):
                 continue
             worm.timestamp = make_aware(datetime.now())
             worm.save()
-            # TODO: figure out way to store where they came from: query string
-            # ?next={{request.path}}
             messages.add_message(request,
                                  messages.SUCCESS,
                                  'You successfully got that worm!')
         else:
             messages.add_message(request,
                                  messages.ERROR,
-                                 'Form data invalid, please see restrictions '
-                                 'by field')
+                                 'Form data invalid, all fields required')
     else:
         messages.add_message(request,
                              messages.ERROR,
                              'Stop trying to hack this site!')
+    return redirect(request.GET['next'])
+
+
+def redirect_slink(request, slink):
+    worm = get_object_or_404(Worm, slink=slink)
+    click = Click(worm=worm, timestamp=make_aware(datetime.now()))
     if request.user.is_authenticated():
-        return redirect('bird_detail', request.user.pk)
-    return redirect('/')
+        click.user = request.user
+    click.save()
+    return redirect(worm.flink.strip())
 
 
 def user_login(request):
@@ -120,11 +130,8 @@ def user_logout(request):
         user_name = request.user.username
         logout(request)
         messages.add_message(request, messages.SUCCESS,
-                             "You have successfully logged out")
-        return render(request,
-                      'bookmarks/user_logout.html',
-                      {'user_name': user_name})
-    else:
+                             "{}, you have successfully logged out".format(
+                                 user_name))
         return redirect('/')
 
 
