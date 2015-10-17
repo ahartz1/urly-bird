@@ -4,6 +4,7 @@ from django.contrib.auth import authenticate, login, logout
 from django.contrib.auth.models import User
 from django.core.urlresolvers import reverse
 from django.shortcuts import redirect, render, get_object_or_404
+from django.utils.timezone import make_aware
 from urlybird.forms import UserForm, WormForm
 from django.views import generic
 from .models import Worm
@@ -50,13 +51,15 @@ def add_worm(request):
                 slink = fake.password(length=7, special_chars=False)
                 if len(Worm.objects.filter(slink=slink)) == 0:
                     worm.slink = slink
-                    worm.save()
                     break
                 continue
-            worm.timestamp = datetime.now()
+            worm.timestamp = make_aware(datetime.now())
             worm.save()
             # TODO: figure out way to store where they came from: query string
             # ?next={{request.path}}
+            messages.add_message(request,
+                                 messages.SUCCESS,
+                                 'You successfully got that worm!')
         else:
             messages.add_message(request,
                                  messages.ERROR,
@@ -66,7 +69,9 @@ def add_worm(request):
         messages.add_message(request,
                              messages.ERROR,
                              'Stop trying to hack this site!')
-    return redirect(request.next)
+    if request.user.is_authenticated():
+        return redirect('bird_detail', request.user.pk)
+    return redirect('/')
 
 
 def edit_worm(request):

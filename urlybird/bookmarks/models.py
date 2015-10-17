@@ -15,7 +15,6 @@ class Worm(models.Model):
     numclicks = models.PositiveIntegerField(null=True, blank=True)
 
     def save(self):
-        # super(Worm, self).save()
         self.numclicks = self.click_set.all().count()
         super(Worm, self).save()
 
