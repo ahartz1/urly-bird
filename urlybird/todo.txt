@@ -1,14 +1,38 @@
 Unassigned:
-- revise WLV, BLV, WDV templates
+- revise nav bar
+- edit and delete (only when auth user)
+- add info glyph to show worm_details
+- set up url regex and function to link slink to flink
+- my worms / my stats
+
+
+Like to have:
+- blue nav bar
+- graphs
+- glyph bookmark?
+- table of users by popularity (most click over all links)
+- can of worms
+  - last 30 days most clicks
+  - all time most clicks
+
+Layout of tables:
+Top row: slink, wtitle
+Second row: winfo, timestamp
+Somewhere: buttons for info, edit, delete
 
 
 Adam:
 - function to add Worm
+- add list of clicks Worm detail view (only for auth user)
 - form for adding Worm, add Worm
+- resize flink text entry box
+- revise WLV & WDV templates (BLV later)
 
 Tyler:
-- edit Worm
-- delete Worm
+- edit Worm functionality to BLV
+- delete Worm functionality to BLV
+- edit and delete as icons
+- stab at adding login required to stats_view
 
 
 Completed:
