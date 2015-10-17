@@ -143,9 +143,6 @@ def delete_worm(request, worm_id):
 @login_required
 def edit_worm(request, worm_id):
     worm = get_object_or_404(Worm, pk=worm_id)
-    # flink = worm.flink
-    # wtitle = worm.wtitle
-    # winfo = worm.winfo
     if request.method == 'GET':
         form = WormForm(instance=worm)
     elif request.method == 'POST':
@@ -163,6 +160,4 @@ def edit_worm(request, worm_id):
                              'by field')
     return render(request,
                   'bookmarks/edit_worm.html', {'worm_id': worm_id,
-                #   {'flink': flink,
-                #    'wtitle': wtitle,
                    'form': form})
