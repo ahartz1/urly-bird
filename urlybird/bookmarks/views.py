@@ -25,7 +25,7 @@ class WormListView(generic.ListView):
 
 
 class BirdListView(generic.ListView):
-    template_name = 'bookmarks/bird_detail.html'
+    template_name = 'bookmarks/bird_list.html'
     context_object_name = 'worms'
     paginate_by = 25
 
@@ -38,29 +38,48 @@ class BirdListView(generic.ListView):
 class WormDetailView(generic.DetailView):
     model = Worm
     template = 'bookmarks/worm_detail.html'
+    context_object_name = 'worm'
 
     def get_context_data(self, **kwargs):
         context = super(WormDetailView, self).get_context_data(**kwargs)
         worm = Worm.objects.get(pk=self.kwargs['pk'])
         context['clicks'] = worm.click_set.all().order_by('-timestamp')
+        context['worm'] = worm
         return context
 
 
+# class ClickListView(generic.ListView):
+#     model = Click
+#     template = 'bookmarks/click_list.html'
+#     context_object_name = 'clicks'
+#     paginate_by = 25
+#
+#     def get_context_data(self, **kwargs):
+#         context = super(ClickListView, self).get_context_data(**kwargs)
+#         worm = Worm.objects.get(pk=self.kwargs['pk'])
+#         context['clicks'] = worm.click_set.all().order_by('-timestamp')
+#         context['worm'] = worm
+#         return context
+#
+#     def get_queryset(self):
+#         return Click.objects.all().filter(Worm.objects.get(pk=self.kwargs['pk'])
+#             .order_by('-timestamp')
+
 def add_worm(request):
     if request.method == 'POST':
-        form = WormForm(request.POST)
+        form=WormForm(request.POST)
         if form.is_valid():
-            worm = form.save(commit=False)
+            worm=form.save(commit=False)
             if request.user.is_authenticated():
-                worm.user = request.user
-            fake = Faker()
+                worm.user=request.user
+            fake=Faker()
             while True:
-                slink = fake.password(length=7, special_chars=False)
+                slink=fake.password(length=7, special_chars=False)
                 if len(Worm.objects.filter(slink=slink)) == 0:
-                    worm.slink = slink
+                    worm.slink=slink
                     break
                 continue
-            worm.timestamp = make_aware(datetime.now())
+            worm.timestamp=make_aware(datetime.now())
             worm.save()
             messages.add_message(request,
                                  messages.SUCCESS,
@@ -77,22 +96,22 @@ def add_worm(request):
 
 
 def redirect_slink(request, slink):
-    worm = get_object_or_404(Worm, slink=slink)
-    click = Click(worm=worm, timestamp=make_aware(datetime.now()))
+    worm=get_object_or_404(Worm, slink=slink)
+    click=Click(worm=worm, timestamp=make_aware(datetime.now()))
     if request.user.is_authenticated():
-        click.user = request.user
+        click.user=request.user
     click.save()
     return redirect(worm.flink.strip())
 
 
 def user_login(request):
     if request.method == 'POST':
-        username = request.POST['username']
-        password = request.POST['password']
-        user = authenticate(username=username, password=password)
+        username=request.POST['username']
+        password=request.POST['password']
+        user=authenticate(username=username, password=password)
         if user is not None and user.is_active:
             login(request, user)
-            return redirect(reverse('bird_detail', args=[user.pk]))
+            return redirect(reverse('bird_list', args=[user.pk]))
         else:
             messages.add_message(request, messages.ERROR, 'ERROR LOGGING IN!')
             return render(request,
@@ -104,22 +123,22 @@ def user_login(request):
 
 def user_register(request):
     if request.method == 'POST':
-        form = UserForm(request.POST)
+        form=UserForm(request.POST)
 
         if form.is_valid():
-            user = form.save()
-            password = form['password']
+            user=form.save()
+            password=form['password']
             user.set_password(password)
             user.save()
 
-            user = authenticate(username=user.username, password=password)
+            user=authenticate(username=user.username, password=password)
             login(request, user)
             messages.add_message(request,
                                  messages.SUCCESS,
                                  'Your account was successfully created.')
             return redirect('user_login')
     else:
-        form = UserForm()
+        form=UserForm()
     return render(request,
                   'bookmarks/user_register.html',
                   {'form': form})
@@ -127,7 +146,7 @@ def user_register(request):
 
 def user_logout(request):
     if request.user.is_authenticated():
-        user_name = request.user.username
+        user_name=request.user.username
         logout(request)
         messages.add_message(request, messages.SUCCESS,
                              "{}, you have successfully logged out".format(
@@ -140,7 +159,7 @@ def delete_worm(request, worm_id):
     if Worm.objects.get(pk=worm_id).user == request.user:
         Worm.objects.get(pk=worm_id).delete()
         messages.add_message(request, messages.SUCCESS, "Worm removed")
-        return redirect('bird_detail', pk=request.user.pk)
+        return redirect('bird_list', pk=request.user.pk)
     else:
         messages.add_message(
             request, messages.ERROR, "You do not have access")
@@ -149,20 +168,20 @@ def delete_worm(request, worm_id):
 
 @login_required
 def edit_worm(request, worm_id):
-    worm = get_object_or_404(Worm, pk=worm_id)
-    flink = worm.flink
-    wtitle = worm.wtitle
-    winfo = worm.winfo
+    worm=get_object_or_404(Worm, pk=worm_id)
+    flink=worm.flink
+    wtitle=worm.wtitle
+    winfo=worm.winfo
     if request.method == 'GET':
-        form = WormForm(instance=worm)
+        form=WormForm(instance=worm)
     elif request.method == 'POST':
-        form = WormForm(instance=worm, data=request.POST)
+        form=WormForm(instance=worm, data=request.POST)
         if form.is_valid():
-            worm = form.save(commit=False)
-            worm.flink = flink
-            worm.wtitle = wtitle
-            worm.winfo = winfo
-            worm.timestamp = datetime.now()
+            worm=form.save(commit=False)
+            worm.flink=flink
+            worm.wtitle=wtitle
+            worm.winfo=winfo
+            worm.timestamp=datetime.now()
             worm.save()
             messages.add_message(request, messages.SUCCESS,
                                  'Updated worm')

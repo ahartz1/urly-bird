@@ -43,7 +43,7 @@
           </li>
           {% if user.is_authenticated %}
           <li role="presentation">
-            <a href="{% url 'bird_detail' user.pk %}">{{ user.username }}</a>
+            <a href="{% url 'bird_list' user.pk %}">{{ user.username }}</a>
           </li>
           <li role="presentation">
             <a href="{% url 'user_logout' %}">Logout</a>

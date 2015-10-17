@@ -7,11 +7,15 @@ urlpatterns = [
         bviews.WormDetailView.as_view(),
         name='worm_detail'),
 
+    # url(r'^worms/(?P<pk>\d+)$',
+    #     bviews.ClickListView.as_view(),
+    #     name='click_list'),
+
     url(r'^worms/add$', bviews.add_worm, name='add_worm'),
 
     url(r'^birds/(?P<pk>\d+)$',
         bviews.BirdListView.as_view(),
-        name='bird_detail'),
+        name='bird_list'),
 
     url(r'^delete/(?P<worm_id>\d+)', bviews.delete_worm, name='delete_worm'),
     url(r'^edit/(?P<worm_id>\d+)', bviews.edit_worm, name='edit_worm'),
