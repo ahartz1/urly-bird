@@ -1,8 +1,10 @@
-<!DOCTYPE html>
 {% load staticfiles %}
+<!DOCTYPE html>
 {% load bootstrap3 %}
 {% load bootstrap_themes %}
 {% bootstrap_styles theme='paper' type='min.css' %}
+{% bootstrap_css %}
+{% bootstrap_javascript jquery=True %}
 
 <html lang="en">
 
@@ -11,9 +13,7 @@
    <meta http-equiv="X-UA-Compatible" content="IE=edge">
    <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>{% block title %}URLy Bird{% endblock %}</title>
-  {% bootstrap_css %}
-  {% bootstrap_javascript jquery=True %}
-  <link rel="stylesheet" type="text/css" href="{% static 'urlybird/style.css' %}" />
+  <link rel="stylesheet" type="text/css" href="{% static 'style.css' %}" />
 </head>
 
 <body>
