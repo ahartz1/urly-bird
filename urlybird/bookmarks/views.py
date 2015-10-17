@@ -9,6 +9,7 @@ from urlybird.forms import UserForm, WormForm
 from django.views import generic
 from .models import Worm
 from faker import Faker
+from django.contrib.auth.decorators import login_required
 
 
 # Create your views here.
@@ -74,10 +75,6 @@ def add_worm(request):
     return redirect('/')
 
 
-def edit_worm(request):
-    pass
-
-
 def user_login(request):
     if request.method == 'POST':
         username = request.POST['username']
@@ -129,3 +126,41 @@ def user_logout(request):
                       {'user_name': user_name})
     else:
         return redirect('/')
+
+
+@login_required
+def delete_worm(request, worm_id):
+    if Worm.objects.get(pk=worm_id).user == request.user:
+        Worm.objects.get(pk=worm_id).delete()
+        messages.add_message(request, messages.SUCCESS, "Worm removed")
+        return redirect('bird_detail', pk=request.user.pk)
+    else:
+        messages.add_message(
+            request, messages.ERROR, "You do not have access")
+        return redirect('recent_worms')
+
+
+@login_required
+def edit_worm(request, worm_id):
+    worm = get_object_or_404(Worm, pk=worm_id)
+    flink = worm.flink
+    wtitle = worm.wtitle
+    winfo = worm.winfo
+    if request.method == 'GET':
+        form = WormForm(instance=worm)
+    elif request.method == 'POST':
+        form = WormForm(instance=worm, data=request.POST)
+        if form.is_valid():
+            worm = form.save(commit=False)
+            worm.flink = flink
+            worm.wtitle = wtitle
+            worm.winfo = winfo
+            worm.timestamp = datetime.now()
+            worm.save()
+            messages.add_message(request, messages.SUCCESS,
+                                 'Updated worm')
+    return render(request,
+                  'bookmarks/edit_worm.html',
+                  {'flink': flink,
+                   'wtitle': wtitle,
+                   'form': form})
