@@ -128,7 +128,7 @@ def delete_worm(request, worm_id):
     if Worm.objects.get(pk=worm_id).user == request.user:
         Worm.objects.get(pk=worm_id).delete()
         messages.add_message(request, messages.SUCCESS, "Worm removed")
-        return redirect('recent_worms')
+        return redirect('bird_detail', pk=request.user.pk)
     else:
         messages.add_message(
             request, messages.ERROR, "You do not have access")
