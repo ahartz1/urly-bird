@@ -10,9 +10,9 @@
   {% if worm.user %}
   User: <a href="{% url 'bird_detail' worm.user_id %}">{{ worm.user.username }}</a> <br>
   {% endif %}
-  Worm: <a href="{{worm.flink}}">{{worm.slink}}</a> <br>
+  Worm: <a href="{% url 'redirect_slink' worm.slink %}">{{worm.slink}}</a> <br>
   Description: {{ worm.winfo }} <br>
-  Full link: <a href="{{worm.flink}}">{{worm.flink}}</a> <br>
+  Full link: <a href="{% url 'redirect_slink' worm.slink %}">{{worm.flink}}</a> <br>
   <small> {{worm.timestamp}} - {{worm.timestamp | timesince}} ago  <br>
     {% if user.pk == worm.user_id %}
       <a href="{% url 'edit_worm' worm.pk %}"><span class="glyphicon glyphicon-pencil"></span></a> |

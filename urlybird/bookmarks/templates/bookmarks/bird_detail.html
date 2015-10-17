@@ -8,7 +8,7 @@
 
 
 {% for worm in worms %}
-  <p><a href="{{worm.flink}}">{{worm.slink}}</a> -
+  <p><a href="{% url 'redirect_slink' worm.slink %}">{{worm.slink}}</a> -
     {{ worm.wtitle }}<br><small>{{worm.timestamp}}
       <a href="{% url 'worm_detail' worm.pk %}"><span class="glyphicon glyphicon-info-sign"></span></a>
       {% if user == view.user %}
