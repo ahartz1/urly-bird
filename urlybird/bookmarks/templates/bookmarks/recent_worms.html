@@ -12,7 +12,8 @@
   <th></th>
   <th>Title</th>
   <th>Bird</th>
-  <th>Date</th>
+  <th>Date Created/Modified</th>
+  <th>Clicks</th>
 </tr>
 {% for worm in worms %}
   <tr>
@@ -25,6 +26,7 @@
       <td>anonymous</td>
     {% endif %}
     <td><small>{{ worm.timestamp }} ({{ worm.timestamp | timesince }} ago)</small></td>
+    <td>{{ worm.numclicks }}</td>
   </tr>
 {% endfor %}
 </table>
