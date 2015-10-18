@@ -168,7 +168,7 @@ def edit_worm(request, worm_id):
             worm.save()
             messages.add_message(request, messages.SUCCESS,
                                  'Updated worm')
-            return redirect('worm_detail', pk=worm_id)
+            return redirect('click_list', pk=worm_id)
         messages.add_message(request,
                              messages.ERROR,
                              'Form data invalid'
