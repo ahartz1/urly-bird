@@ -11,9 +11,16 @@ urlpatterns = [
     url(r'^birds/(?P<pk>\d+)$',
         bviews.BirdListView.as_view(), name='bird_list'),
 
+    url(r'^birds/pop/(?P<pk>\d+)$',
+        bviews.BirdPopListView.as_view(), name='bird_pop_list'),
+
     url(r'^delete/(?P<worm_id>\d+)', bviews.delete_worm, name='delete_worm'),
 
     url(r'^edit/(?P<worm_id>\d+)', bviews.edit_worm, name='edit_worm'),
+
+    url(r'^popall$', bviews.PopAllListView.as_view(), name='popall_worms'),
+
+    url(r'^pop30$', bviews.Pop30ListView.as_view(), name='pop30_worms'),
 
     url(r'^$', bviews.WormListView.as_view(), name='recent_worms'),
 

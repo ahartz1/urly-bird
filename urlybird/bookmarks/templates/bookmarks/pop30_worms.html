@@ -1,0 +1,37 @@
+{% extends "add_base.html" %}
+{% load bootstrap3 %}
+{% block content %}
+
+<body>
+
+<h2>Most Popular in the Last 30 Days</h2>
+
+<table class="table table-striped">
+<tr>
+  <th>Inch Worm</th>
+  <th></th>
+  <th>Title</th>
+  <th>Bird</th>
+  <th>Date Created/Modified</th>
+  <th>Clicks</th>
+</tr>
+{% for worm in worms %}
+  <tr>
+    <td><b><a href="{% url 'redirect_slink' worm.slink %}">{{ worm.slink }}</a></b></td>
+    <td><a href="{% url 'click_list' worm.pk %}"><span class="glyphicon glyphicon-info-sign"></span></a></td>
+    <td>{{ worm.wtitle|truncatechars:50 }}</td>
+    {% if worm.user %}
+      <td><a href="{% url 'bird_list' worm.user.pk %}">{{ worm.user }}</a></td>
+    {% else %}
+      <td>anonymous</td>
+    {% endif %}
+    <td><small>{{ worm.timestamp }} ({{ worm.timestamp | timesince }} ago)</small></td>
+    <td>{{ worm.numclicks }}</td>
+  </tr>
+{% endfor %}
+</table>
+
+<div class="text-center">
+  {% bootstrap_pagination page_obj pages_to_show=5 %}
+</div>
+{% endblock %}
