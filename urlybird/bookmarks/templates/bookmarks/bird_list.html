@@ -4,6 +4,7 @@
 
 <body>
 
+{% if worms %}
 <h2>{{ view.user.username }}'s Worms</h2>
 
 <table class="table table-striped">
@@ -40,4 +41,8 @@
 <div class="text-center">
   {% bootstrap_pagination page_obj pages_to_show=5 %}
 </div>
+{% else %}
+<h2>{{ view.user.username }}</h2>
+<h4>You don't have any worms yet.<h4>
+{% endif %}
 {% endblock %}
