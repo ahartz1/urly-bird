@@ -48,6 +48,16 @@ class Pop30ListView(generic.ListView):
         return thirtyworms.order_by('-numclicks')
 
 
+class TopBirdsListView(generic.ListView):
+    template_name = 'bookmarks/top_birds.html'
+    context_object_name = 'birds'
+    paginate_by = 25
+
+    def get_queryset(self):
+        self.form = WormForm()
+        return User.objects.annotate(bird_clicks=Count('click')).order_by('-bird_clicks')
+
+
 class BirdListView(generic.ListView):
     template_name = 'bookmarks/bird_list.html'
     context_object_name = 'worms'
