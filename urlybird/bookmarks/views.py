@@ -1,4 +1,4 @@
-from datetime import datetime
+from datetime import datetime, timedelta
 from django.contrib import messages
 from django.contrib.auth import authenticate, login, logout
 from django.contrib.auth.models import User
@@ -6,6 +6,7 @@ from django.core.urlresolvers import reverse
 from django.shortcuts import redirect, render, get_object_or_404
 from django.utils.timezone import make_aware
 from urlybird.forms import UserForm, WormForm
+from django.db.models import Count
 from django.views import generic
 from .models import Worm, Click
 from faker import Faker
@@ -23,6 +24,29 @@ class WormListView(generic.ListView):
         self.form = WormForm()
         return Worm.objects.all().order_by('-timestamp') \
             .prefetch_related('user')
+
+
+class PopAllListView(generic.ListView):
+    template_name = 'bookmarks/popall_worms.html'
+    context_object_name = 'worms'
+    paginate_by = 25
+
+    def get_queryset(self):
+        self.form = WormForm()
+        return Worm.objects.order_by('-numclicks')
+
+
+class Pop30ListView(generic.ListView):
+    template_name = 'bookmarks/pop30_worms.html'
+    context_object_name = 'worms'
+    paginate_by = 25
+
+
+    def get_queryset(self):
+        self.form = WormForm()
+        last30 = datetime.now() - timedelta(days=30)
+        thirtyworms = Worm.objects.filter(timestamp__gt=last30)
+        return thirtyworms.order_by('-numclicks')
 
 
 class BirdListView(generic.ListView):

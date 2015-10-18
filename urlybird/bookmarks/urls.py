@@ -15,6 +15,10 @@ urlpatterns = [
 
     url(r'^edit/(?P<worm_id>\d+)', bviews.edit_worm, name='edit_worm'),
 
+    url(r'^popall$', bviews.PopAllListView.as_view(), name='popall_worms'),
+
+    url(r'^pop30$', bviews.Pop30ListView.as_view(), name='pop30_worms'),
+
     url(r'^$', bviews.WormListView.as_view(), name='recent_worms'),
 
     url(r'^(?P<slink>[A-Za-z0-9]{7})$',
