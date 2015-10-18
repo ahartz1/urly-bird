@@ -41,7 +41,6 @@ class Pop30ListView(generic.ListView):
     context_object_name = 'worms'
     paginate_by = 25
 
-
     def get_queryset(self):
         self.form = WormForm()
         last30 = datetime.now() - timedelta(days=30)
@@ -58,6 +57,20 @@ class BirdListView(generic.ListView):
         self.form = WormForm()
         self.user = get_object_or_404(User, pk=self.kwargs['pk'])
         return self.user.worm_set.all().order_by('-timestamp') \
+            .prefetch_related('user')
+
+
+class BirdPopListView(generic.ListView):
+    template_name = 'bookmarks/bird_pop_list.html'
+    context_object_name = 'worms'
+    paginate_by = 25
+
+    def get_queryset(self):
+        self.form = WormForm()
+        self.user = get_object_or_404(User, pk=self.kwargs['pk'])
+        last30 = datetime.now() - timedelta(days=30)
+        thirtybird = self.user.worm_set.all().filter(timestamp__gt=last30)
+        return thirtybird.order_by('-numclicks') \
             .prefetch_related('user')
 
 
@@ -199,4 +212,4 @@ def edit_worm(request, worm_id):
                              'by field')
     return render(request,
                   'bookmarks/edit_worm.html', {'worm_id': worm_id,
-                   'form': form})
+                                               'form': form})

@@ -39,12 +39,18 @@
               <li><a href="{% url 'popall_worms' %}">Most Popular Worms - All-Time</a></li>
               <li><a href="{% url 'pop30_worms' %}">Most Popular Worms - Last 30 Days</a></li>
             </ul>
+          </li>
 
-          </li>
           {% if user.is_authenticated %}
-          <li role="presentation">
-            <a href="{% url 'bird_list' user.pk %}">{{ user.username }}</a>
-          </li>
+
+          <li class="dropdown">
+          <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false"> {{ user.username }} <span class="caret"></span></a>
+          <ul class="dropdown-menu" role="menu">
+            <li><a href="{% url 'bird_list' user.pk %}">{{ user.username }}'s Worms By Date</a></li>
+            <li><a href="{% url 'bird_pop_list' user.pk %}">{{ user.username }}'s Worms By Popularity</a></li>
+          </ul>
+        </li>
+
           <li role="presentation">
             <a href="{% url 'user_logout' %}">Logout</a>
           </li>

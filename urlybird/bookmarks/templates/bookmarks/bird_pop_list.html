@@ -5,8 +5,8 @@
 <body>
 
 {% if worms %}
-<h2>{{ view.user.username }}'s Worms By Date</h2>
-
+{% if user == view.user %}
+<h2>{{ view.user.username }}'s Worms By Popularity</h2>
 <table class="table table-striped">
 <tr>
   <th>Inch Worm</th>
@@ -14,6 +14,7 @@
   <th>Title</th>
   <th>Bird</th>
   <th>Date</th>
+  <th>Clicks</th>
   <th></th>
 </tr>
 {% for worm in worms %}
@@ -31,18 +32,17 @@
       <td>anonymous</td>
     {% endif %}
     <td><small>{{ worm.timestamp }} ({{ worm.timestamp | timesince }} ago)</small></td>
-    {% if user == view.user %}
     <td><a href="{% url 'delete_worm' worm.pk %}"><span class="glyphicon glyphicon-trash"></span></a></td>
-    {% endif %}
+    <td>{{ worm.numclicks }}</td>
   </tr>
 {% endfor %}
 </table>
-
 <div class="text-center">
   {% bootstrap_pagination page_obj pages_to_show=5 %}
 </div>
+{% endif %}
 {% else %}
 <h2>{{ view.user.username }}</h2>
-<h4>You don't have any worms yet.<h4>
+<h4>None of your worms have clicked used in the last month.<h4>
 {% endif %}
 {% endblock %}
