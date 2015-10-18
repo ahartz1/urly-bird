@@ -15,7 +15,7 @@
           <b>Description: </b>{{ worm.winfo }}
           <br>
           {% if worm.user %}
-          <b>User: </b><a href="{% url 'bird_list' worm.user_id %}">{{ worm.user.username }}</a>
+          <b>Bird: </b><a href="{% url 'bird_list' worm.user_id %}">{{ worm.user.username }}</a>
           <br>
           {% endif %}
           <b>Inch Worm: <a href="{% url 'redirect_slink' worm.slink %}">{{worm.slink}}</a></b>
