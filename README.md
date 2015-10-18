@@ -28,10 +28,25 @@ $ python manage.py updatenumclicks
 * **Running the site** requires more command line. Navigate to `urly-bird/urlybird` and enter `python manage.py runserver` This will take over the current command-line program's window until you stop the server. Kill the process by pressing `Ctrl+C` or quitting the command-line program entirely.
 
 ### Recent Worms
-Located at `localhost/`, where `localhost` is the location of your Django server.
+Located at `localhost/`, where `localhost` is the location of your Django server. Shows all worms on the site, arranged by creation/modification date.
+
+### Most Popular Worms – Last 30 Days
+Located at `localhost/pop30`, where `localhost` is the location of your Django server. Shows all worms created/modified on the site within the last 30 days, arranged by number of clicks.
+
+
+### Most Popular Worms – All-Time
+Located at `localhost/popall`, where `localhost` is the location of your Django server. Shows all worms on the site, arranged by number of clicks.
+
 
 ### Bird Pages
 Users on this site are referred to as "birds." Located at `localhost/birds/bird_id`, where `localhost` is the location of your django server and `bird_id` is the user_id. These are more easily accessed through the interface by logging in (to see your own bird page) or by clicking on another bird's name.
+
+Logged in birds can see:
+
+ * All of their worms, arranged by creation/modified date.
+
+ * The popularity of the worms created/modified within the last 30 days.
+
 
 ### Worm Pages
 Located at `localhost/worms/worm_id`, where `localhost` is the location of your Django server and `worm_id` is the number associated with that worm. These are more easily accessed through the interface by clicking on the info buttons throughout the site.
