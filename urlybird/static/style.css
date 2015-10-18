@@ -4,8 +4,4 @@
 .navbar-nav>li>a:hover,.navbar-inverse
 
 .btn-primary{background-color:#2196f3;border-color:transparent}
-.btn-primary{background-color:#2196f3;border-color:transparent}
-
-.btn-primary .btn-primary{color:#b2dbfb}.btn-primary
-.btn-primary>li>a{color:#b2dbfb}.btn-primary
-.nbtn-primary>li>a:hover,.btn
+.btn-primary{background-color:#2196f3;border-color:transparent; color:#b2dbfb}
