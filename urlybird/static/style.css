@@ -1,7 +1,28 @@
-.navbar-inverse{background-color:#2196f3;border-color:transparent}
-.navbar-inverse .navbar-brand{color:#b2dbfb}.navbar-inverse
-.navbar-nav>li>a{color:#b2dbfb}.navbar-inverse
+.navbar-inverse{
+      background-color:#2196f3;
+      border-color:transparent}
+.navbar-inverse .navbar-brand{
+      color:#b2dbfb}.navbar-inverse
+.navbar-nav>li>a{
+      color:#b2dbfb}.navbar-inverse
 .navbar-nav>li>a:hover,.navbar-inverse
 
-.btn-primary{background-color:#2196f3;border-color:transparent}
-.btn-primary{background-color:#2196f3;border-color:transparent; color:#b2dbfb}
+.btn-primary{
+    background-color:#2196f3;
+    border-color:transparent}
+.btn-primary{background-color:#2196f3;
+    border-color:transparent;
+    color:#EBF5FF}
+
+.btn-primary{
+      color:#EBF5FF;
+      background-color:#2196f3;
+      border-color:transparent}.btn-primary:focus,
+.btn-primary.focus{
+      color:#EBF5FF;
+      background-color:#ffffff;
+      border-color:rgba(0,0,0,0)}.btn-primary:hover{
+                                              color:#ffffff;
+                                              background-color:#0c7cd5;
+                                              border-color:rgba(0,0,0,0)
+                                              }.btn-primary:active,
