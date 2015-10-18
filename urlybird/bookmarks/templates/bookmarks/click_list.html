@@ -6,13 +6,13 @@
 
 <h2>Worm Details</h2>
 
-<p>Title: {{ worm.wtitle }} <br>
+<p><b>Title: </b>{{ worm.wtitle }} <br>
+  <b>Description: </b>{{ worm.winfo }} <br>
   {% if worm.user %}
-  User: <a href="{% url 'bird_list' worm.user_id %}">{{ worm.user.username }}</a> <br>
+  <b>User: </b><a href="{% url 'bird_list' worm.user_id %}">{{ worm.user.username }}</a> <br>
   {% endif %}
-  Worm: <a href="{% url 'redirect_slink' worm.slink %}">{{worm.slink}}</a> <br>
-  Description: {{ worm.winfo }} <br>
-  Full link: <a href="{% url 'redirect_slink' worm.slink %}">{{worm.flink}}</a> <br>
+  <b>Inch Worm: <a href="{% url 'redirect_slink' worm.slink %}">{{worm.slink}}</a></b> <br>
+  <b>Full Link: </b><a href="{% url 'redirect_slink' worm.slink %}">{{worm.flink}}</a> <br>
   <small> {{worm.timestamp}} - {{worm.timestamp | timesince}} ago  <br>
     {% if user.pk == worm.user_id %}
       <a href="{% url 'edit_worm' worm.pk %}"><span class="glyphicon glyphicon-pencil"></span></a> |

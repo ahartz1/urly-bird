@@ -1,11 +1,13 @@
 {% extends "base.html" %}
 {% block add_worm %}
+
 <form method="POST" action="{% url 'add_worm' %}?next={{ request.path }}">
   {% csrf_token %}
-  <p><label for="id_flink">Full link:</label> <textarea cols="85" id="id_flink" maxlength="2000" name="flink" rows="1">
+  <p><label for="id_flink">Full Link:&nbsp;</label> <textarea cols="85" id="id_flink" maxlength="2000" name="flink" rows="1">
   </textarea></p>
-  <p><label for="id_wtitle">Title:</label> <input id="id_wtitle" maxlength="100" name="wtitle" type="text" />
-   <label for="id_winfo">Description:</label> <input id="id_winfo" maxlength="255" name="winfo" type="text" />
-  <input type="submit" value="Shorten it!" class="btn btn-xs btn-primary"></p>
+  <p><label for="id_wtitle">Title:&nbsp;</label> <input id="id_wtitle" maxlength="100" name="wtitle" type="text" />
+   <label for="id_winfo">&nbsp;&nbsp;&nbsp;Description:&nbsp;</label><input id="id_winfo" maxlength="255" name="winfo" type="text" />
+  &nbsp;&nbsp;<input type="submit" value="Shorten it!" class="btn btn-xs btn-primary"></p>
 </form>
+
 {% endblock %}
