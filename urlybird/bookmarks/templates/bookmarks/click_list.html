@@ -19,6 +19,7 @@
       <a href="{% url 'delete_worm' worm.pk %}"><span class="glyphicon glyphicon-trash"></span></a>
     {% endif %}</small>
 </p>
+{% if clicks %}
 <br>
 <table class="table table-striped">
 <tr>
@@ -40,4 +41,5 @@
 <div class="text-center">
   {% bootstrap_pagination page_obj pages_to_show=5 %}
 </div>
+{% endif %}
 {% endblock %}
