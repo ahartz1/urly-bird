@@ -35,19 +35,6 @@ class BirdListView(generic.ListView):
         return self.user.worm_set.all().order_by('-timestamp')
 
 
-# class WormDetailView(generic.DetailView):
-#     model = Worm
-#     template = 'bookmarks/click_list.html'
-#     context_object_name = 'worm'
-#
-#     def get_context_data(self, **kwargs):
-#         context = super(WormDetailView, self).get_context_data(**kwargs)
-#         worm = Worm.objects.get(pk=self.kwargs['pk'])
-#         context['clicks'] = worm.click_set.all().order_by('-timestamp')
-#         context['worm'] = worm
-#         return context
-
-
 class ClickListView(generic.ListView):
     model = Click
     template = 'bookmarks/click_list.html'
