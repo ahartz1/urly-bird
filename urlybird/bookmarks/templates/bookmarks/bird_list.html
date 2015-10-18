@@ -6,21 +6,10 @@
 
 <h2>{{ view.user.username }}'s Worms</h2>
 
-
-{% for worm in worms %}
-  <p><a href="{% url 'redirect_slink' worm.slink %}">{{worm.slink}}</a> -
-    {{ worm.wtitle }}<br><small>{{worm.timestamp}}
-      <a href="{% url 'click_list' worm.pk %}"><span class="glyphicon glyphicon-info-sign"></span></a>
-      {% if user == view.user %}
-    |<a href="{% url 'edit_worm' worm.pk %}"><span class="glyphicon glyphicon-pencil"></span></a> |
-    <a href="{% url 'delete_worm' worm.pk %}"><span class="glyphicon glyphicon-trash"></span></a>
-    {% endif %}</small> </p>
-{% endfor %}
-
-
 <table class="table table-striped">
 <tr>
   <th>Inch Worm</th>
+  <th></th>
   <th>Title</th>
   <th>Bird</th>
   <th>Date</th>
@@ -28,7 +17,12 @@
 </tr>
 {% for worm in worms %}
   <tr>
-    <td><b><a href="{% url 'redirect_slink' worm.slink %}">{{ worm.slink }}</a></b></td>
+    <td><b><a href="{% url 'redirect_slink' worm.slink %}">{{ worm.slink|ljust:10 }}</a></b></td>
+    <td><a href="{% url 'click_list' worm.pk %}"><span class="glyphicon glyphicon-info-sign"></span></a>
+      {% if user == view.user %}
+        <a href="{% url 'edit_worm' worm.pk %}"><span class="glyphicon glyphicon-pencil"></span></a>
+      {% endif %}
+    </td>
     <td>{{ worm.wtitle|truncatechars:50 }}</td>
     {% if worm.user %}
       <td><a href="{% url 'bird_list' worm.user.pk %}">{{ worm.user }}</a></td>
@@ -36,8 +30,9 @@
       <td>anonymous</td>
     {% endif %}
     <td><small>{{ worm.timestamp }} ({{ worm.timestamp | timesince }} ago)</small></td>
-    <td><a href="{% url 'click_list' worm.pk %}"><span class="glyphicon glyphicon-info-sign">
-    </span></a></td>
+    {% if user == view.user %}
+    <td><a href="{% url 'delete_worm' worm.pk %}"><span class="glyphicon glyphicon-trash"></span></a></td>
+    {% endif %}
   </tr>
 {% endfor %}
 </table>

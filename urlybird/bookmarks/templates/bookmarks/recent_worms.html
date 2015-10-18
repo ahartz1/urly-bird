@@ -9,14 +9,15 @@
 <table class="table table-striped">
 <tr>
   <th>Inch Worm</th>
+  <th></th>
   <th>Title</th>
   <th>Bird</th>
   <th>Date</th>
-  <th></th>
 </tr>
 {% for worm in worms %}
   <tr>
     <td><b><a href="{% url 'redirect_slink' worm.slink %}">{{ worm.slink }}</a></b></td>
+    <td><a href="{% url 'click_list' worm.pk %}"><span class="glyphicon glyphicon-info-sign"></span></a></td>
     <td>{{ worm.wtitle|truncatechars:50 }}</td>
     {% if worm.user %}
       <td><a href="{% url 'bird_list' worm.user.pk %}">{{ worm.user }}</a></td>
@@ -24,8 +25,6 @@
       <td>anonymous</td>
     {% endif %}
     <td><small>{{ worm.timestamp }} ({{ worm.timestamp | timesince }} ago)</small></td>
-    <td><a href="{% url 'click_list' worm.pk %}"><span class="glyphicon glyphicon-info-sign">
-    </span></a></td>
   </tr>
 {% endfor %}
 </table>

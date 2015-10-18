@@ -43,10 +43,7 @@ class ClickListView(generic.ListView):
 
     def get_context_data(self, **kwargs):
         context = super(ClickListView, self).get_context_data(**kwargs)
-        # worm = self.worm_set.first().worm
-        worm = Worm.objects.get(pk=self.kwargs['pk'])
-        context['clicks'] = worm.click_set.all().order_by('-timestamp')
-        context['worm'] = worm
+        context['worm'] = Worm.objects.get(pk=self.kwargs['pk'])
         return context
 
     def get_queryset(self):
