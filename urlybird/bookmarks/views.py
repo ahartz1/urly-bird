@@ -34,7 +34,7 @@ class BirdListView(generic.ListView):
         self.form = WormForm()
         self.user = get_object_or_404(User, pk=self.kwargs['pk'])
         return self.user.worm_set.all().order_by('-timestamp') \
-            .prefetch_related('user').prefetch_related('click')
+            .prefetch_related('user')
 
 
 class ClickListView(generic.ListView):
