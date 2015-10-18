@@ -51,7 +51,9 @@
   </tr>
 {% endfor %}
 </table>
+{% endif %}
 
+{% if worm.numclicks > 25 %}
 <div class="text-center">
   {% bootstrap_pagination page_obj pages_to_show=5 %}
 </div>
