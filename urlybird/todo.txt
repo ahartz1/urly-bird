@@ -20,7 +20,6 @@ Somewhere: buttons for info, edit, delete
 
 
 Adam:
-- revise WLV & WDV templates (BLV later)
 
 
 Tyler:
@@ -41,3 +40,4 @@ Completed:
 √ add info glyph to show click_lists
 √ set up url regex and function to link slink to flink
 √ add list of clicks Worm detail view (only for auth user)
+√ revise WLV & WDV templates (BLV later)
