@@ -15,10 +15,6 @@ class Worm(models.Model):
     numclicks = models.PositiveIntegerField(null=True, blank=True)
 
     def save(self):
-        try:
-            self.numclicks = self.click_set.all().count()
-        except:
-            pass
         self.flink = self.flink.strip()
         super(Worm, self).save()
 
@@ -27,3 +23,8 @@ class Click(models.Model):
     user = models.ForeignKey(User, null=True, blank=True)
     worm = models.ForeignKey(Worm)
     timestamp = models.DateTimeField()
+
+    def save(self):
+        super(Click, self).save()
+        self.worm.numclicks = self.worm.click_set.all().count()
+        self.worm.save()
