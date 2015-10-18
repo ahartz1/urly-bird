@@ -10,7 +10,7 @@
 {% for worm in worms %}
   <p><a href="{% url 'redirect_slink' worm.slink %}">{{worm.slink}}</a> -
     {{ worm.wtitle }}<br><small>{{worm.timestamp}}
-      <a href="{% url 'worm_detail' worm.pk %}"><span class="glyphicon glyphicon-info-sign"></span></a>
+      <a href="{% url 'click_list' worm.pk %}"><span class="glyphicon glyphicon-info-sign"></span></a>
       {% if user == view.user %}
     |<a href="{% url 'edit_worm' worm.pk %}"><span class="glyphicon glyphicon-pencil"></span></a> |
     <a href="{% url 'delete_worm' worm.pk %}"><span class="glyphicon glyphicon-trash"></span></a>
@@ -36,7 +36,7 @@
       <td>anonymous</td>
     {% endif %}
     <td><small>{{ worm.timestamp }} ({{ worm.timestamp | timesince }} ago)</small></td>
-    <td><a href="{% url 'worm_detail' worm.pk %}"><span class="glyphicon glyphicon-info-sign">
+    <td><a href="{% url 'click_list' worm.pk %}"><span class="glyphicon glyphicon-info-sign">
     </span></a></td>
   </tr>
 {% endfor %}

@@ -5,7 +5,7 @@ from . import views as bviews
 urlpatterns = [
     # url(r'^worms/(?P<pk>\d+)$',
     #     bviews.WormDetailView.as_view(),
-    #     name='worm_detail'),
+    #     name='click_list'),
 
     url(r'^worms/(?P<pk>\d+)$',
         bviews.ClickListView.as_view(),

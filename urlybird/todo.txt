@@ -38,6 +38,6 @@ Completed:
 √ delete Worm functionality to BLV
 √ edit and delete as icons
 √ stab at adding login required to stats_view (just use if user.is_authenticated)
-√ add info glyph to show worm_details
+√ add info glyph to show click_lists
 √ set up url regex and function to link slink to flink
 √ add list of clicks Worm detail view (only for auth user)

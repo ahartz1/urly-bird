@@ -37,7 +37,7 @@ class BirdListView(generic.ListView):
 
 # class WormDetailView(generic.DetailView):
 #     model = Worm
-#     template = 'bookmarks/worm_detail.html'
+#     template = 'bookmarks/click_list.html'
 #     context_object_name = 'worm'
 #
 #     def get_context_data(self, **kwargs):
