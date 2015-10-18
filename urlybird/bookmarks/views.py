@@ -25,7 +25,7 @@ class WormListView(generic.ListView):
 
 
 class BirdListView(generic.ListView):
-    template_name = 'bookmarks/bird_detail.html'
+    template_name = 'bookmarks/bird_list.html'
     context_object_name = 'worms'
     paginate_by = 25
 
@@ -35,15 +35,20 @@ class BirdListView(generic.ListView):
         return self.user.worm_set.all().order_by('-timestamp')
 
 
-class WormDetailView(generic.DetailView):
-    model = Worm
-    template = 'bookmarks/worm_detail.html'
+class ClickListView(generic.ListView):
+    model = Click
+    template = 'bookmarks/click_list.html'
+    context_object_name = 'clicks'
+    paginate_by = 25
 
     def get_context_data(self, **kwargs):
-        context = super(WormDetailView, self).get_context_data(**kwargs)
-        worm = Worm.objects.get(pk=self.kwargs['pk'])
-        context['clicks'] = worm.click_set.all().order_by('-timestamp')
+        context = super(ClickListView, self).get_context_data(**kwargs)
+        context['worm'] = Worm.objects.get(pk=self.kwargs['pk'])
         return context
+
+    def get_queryset(self):
+        return Click.objects.filter(worm=Worm.objects.get(
+            pk=self.kwargs['pk'])).order_by('-timestamp')
 
 
 def add_worm(request):
@@ -92,7 +97,7 @@ def user_login(request):
         user = authenticate(username=username, password=password)
         if user is not None and user.is_active:
             login(request, user)
-            return redirect(reverse('bird_detail', args=[user.pk]))
+            return redirect(reverse('bird_list', args=[user.pk]))
         else:
             messages.add_message(request, messages.ERROR, 'ERROR LOGGING IN!')
             return render(request,
@@ -140,7 +145,7 @@ def delete_worm(request, worm_id):
     if Worm.objects.get(pk=worm_id).user == request.user:
         Worm.objects.get(pk=worm_id).delete()
         messages.add_message(request, messages.SUCCESS, "Worm removed")
-        return redirect('bird_detail', pk=request.user.pk)
+        return redirect('bird_list', pk=request.user.pk)
     else:
         messages.add_message(
             request, messages.ERROR, "You do not have access")

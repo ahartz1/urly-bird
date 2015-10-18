@@ -1,18 +1,18 @@
 {% extends "base.html" %}
-
+{% load bootstrap3 %}
 {% block content %}
 
 <body>
 
-<h2> Worm Details</h2>
+<h2>Worm Details</h2>
 
 <p>Title: {{ worm.wtitle }} <br>
   {% if worm.user %}
-  User: <a href="{% url 'bird_detail' worm.user_id %}">{{ worm.user.username }}</a> <br>
+  User: <a href="{% url 'bird_list' worm.user_id %}">{{ worm.user.username }}</a> <br>
   {% endif %}
-  Worm: <a href="{{worm.flink}}">{{worm.slink}}</a> <br>
+  Worm: <a href="{% url 'redirect_slink' worm.slink %}">{{worm.slink}}</a> <br>
   Description: {{ worm.winfo }} <br>
-  Full link: <a href="{{worm.flink}}">{{worm.flink}}</a> <br>
+  Full link: <a href="{% url 'redirect_slink' worm.slink %}">{{worm.flink}}</a> <br>
   <small> {{worm.timestamp}} - {{worm.timestamp | timesince}} ago  <br>
     {% if user.pk == worm.user_id %}
       <a href="{% url 'edit_worm' worm.pk %}"><span class="glyphicon glyphicon-pencil"></span></a> |
@@ -29,7 +29,7 @@
   <tr>
     <td>{{ click.timestamp }} ({{ click.timestamp | timesince }} ago)</td>
     {% if click.user %}
-    <td><b><a href="{% url 'bird_detail' click.user.pk %}">{{ click.user }}</a></b></td>
+    <td><b><a href="{% url 'bird_list' click.user.pk %}">{{ click.user }}</a></b></td>
     {% else %}
     <td>anonymous</td>
     {% endif %}
@@ -37,4 +37,7 @@
 {% endfor %}
 </table>
 
+<div class="text-center">
+  {% bootstrap_pagination page_obj pages_to_show=5 %}
+</div>
 {% endblock %}
