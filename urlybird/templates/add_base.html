@@ -3,11 +3,16 @@
 
 <form method="POST" action="{% url 'add_worm' %}?next={{ request.path }}">
   {% csrf_token %}
-  <p><label for="id_flink">Full Link:&nbsp;</label> <textarea cols="85" id="id_flink" maxlength="2000" name="flink" rows="1">
-  </textarea></p>
-  <p><label for="id_wtitle">Title:&nbsp;</label> <input id="id_wtitle" maxlength="100" name="wtitle" type="text" />
-   <label for="id_winfo">&nbsp;&nbsp;&nbsp;Description:&nbsp;</label><input id="id_winfo" maxlength="255" name="winfo" type="text" />
-  &nbsp;&nbsp;<input type="submit" value="Shorten it!" class="btn btn-xs btn-primary"></p>
+  <p>
+    <textarea cols="90" id="id_flink" maxlength="2000" name="flink" rows="1" placeholder="Full Link"></textarea>
+  </p>
+  <p>
+    <textarea cols="40" id="id_wtitle" maxlength="100" name="wtitle" rows="1" placeholder="Title"></textarea>
+    &nbsp;&nbsp;&nbsp;&nbsp;<textarea cols="44" id="id_winfo" maxlength="255" name="winfo" rows="1" placeholder="Description"></textarea>
+  </p>
+  <p>
+    <input type="submit" value="Shorten it!" class="btn btn-sm btn-primary">
+  </p>
 </form>
 
 {% endblock %}
