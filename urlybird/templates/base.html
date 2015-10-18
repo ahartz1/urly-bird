@@ -31,7 +31,7 @@
 
     <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-2">
       <ul class="nav navbar-nav navbar-right">
-        <li role=presentation>
+          <li role=presentation>
             <a href="{% url 'recent_worms' %}">Recent Worms</a>
           </li>
           {% if user.is_authenticated %}
@@ -49,8 +49,7 @@
             <a href="{% url 'user_register' %}">Register</a>
           </li>
           {% endif %}
-        </li>
-
+        </ul>
     </div>
   </div>
 </nav>
