@@ -125,7 +125,7 @@ def user_register(request):
             messages.add_message(request,
                                  messages.SUCCESS,
                                  'Your account was successfully created.')
-            return redirect('user_login')
+            return redirect('bird_list', user.pk)
     else:
         form = UserForm()
     return render(request,
