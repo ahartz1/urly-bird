@@ -3,22 +3,37 @@
 {% block content %}
 
 <body>
+  <div class="row">
+    <div class="col-md-8">
+      <div class="panel panel-default">
+        <div class="panel-heading">
+          <h1 class="panel-title"><b>Worm Details</b></h1>
+        </div>
+        <div class="panel-body">
+          <p><b>Title: </b>{{ worm.wtitle }}
+          <br>
+          <b>Description: </b>{{ worm.winfo }}
+          <br>
+          {% if worm.user %}
+          <b>Bird: </b><a href="{% url 'bird_list' worm.user_id %}">{{ worm.user.username }}</a>
+          <br>
+          {% endif %}
+          <b>Inch Worm: <a href="{% url 'redirect_slink' worm.slink %}">{{worm.slink}}</a></b>
+          <br>
+          <b>Full Link: </b><a href="{% url 'redirect_slink' worm.slink %}">{{worm.flink}}</a>
+          <br>
+          <small> {{worm.timestamp}} - {{worm.timestamp | timesince}} ago&nbsp;&nbsp;
+            {% if user.pk == worm.user_id %}
+              <a href="{% url 'edit_worm' worm.pk %}"><span class="glyphicon glyphicon-pencil"></span></a> |
+              <a href="{% url 'delete_worm' worm.pk %}"><span class="glyphicon glyphicon-trash"></span></a>
+            {% endif %}</small>
+          </p>
+        </div>
+      </div>
+    </div>
+  </div>
 
-<h2>Worm Details</h2>
-
-<p>Title: {{ worm.wtitle }} <br>
-  {% if worm.user %}
-  User: <a href="{% url 'bird_list' worm.user_id %}">{{ worm.user.username }}</a> <br>
-  {% endif %}
-  Worm: <a href="{% url 'redirect_slink' worm.slink %}">{{worm.slink}}</a> <br>
-  Description: {{ worm.winfo }} <br>
-  Full link: <a href="{% url 'redirect_slink' worm.slink %}">{{worm.flink}}</a> <br>
-  <small> {{worm.timestamp}} - {{worm.timestamp | timesince}} ago  <br>
-    {% if user.pk == worm.user_id %}
-      <a href="{% url 'edit_worm' worm.pk %}"><span class="glyphicon glyphicon-pencil"></span></a> |
-      <a href="{% url 'delete_worm' worm.pk %}"><span class="glyphicon glyphicon-trash"></span></a>
-    {% endif %}</small>
-</p>
+{% if clicks %}
 <br>
 <table class="table table-striped">
 <tr>
@@ -40,4 +55,5 @@
 <div class="text-center">
   {% bootstrap_pagination page_obj pages_to_show=5 %}
 </div>
+{% endif %}
 {% endblock %}

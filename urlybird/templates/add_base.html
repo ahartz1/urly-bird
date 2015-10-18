@@ -1,11 +1,26 @@
 {% extends "base.html" %}
 {% block add_worm %}
+
 <form method="POST" action="{% url 'add_worm' %}?next={{ request.path }}">
   {% csrf_token %}
-  <p><label for="id_flink">Full link:</label> <textarea cols="85" id="id_flink" maxlength="2000" name="flink" rows="1">
-  </textarea></p>
-  <p><label for="id_wtitle">Title:</label> <input id="id_wtitle" maxlength="100" name="wtitle" type="text" />
-   <label for="id_winfo">Description:</label> <input id="id_winfo" maxlength="255" name="winfo" type="text" />
-  <input type="submit" value="Shorten it!" class="btn btn-xs btn-primary"></p>
+  <div class="row">
+    <div class="col-md-8">
+      <textarea class="form-control" cols="90" id="id_flink" maxlength="2000" name="flink" rows="1" placeholder="Full Link"></textarea>
+    </div>
+  </div>
+  <br>
+  <div class="row">
+    <div class="col-md-4">
+      <textarea class="form-control" cols="40" id="id_wtitle" maxlength="100" name="wtitle" rows="1" placeholder="Title"></textarea>
+      <br>
+      <input type="submit" class="btn btn-md btn-primary" value="&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Shorten it!&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;">
+    </div>
+    <div class="col-md-4">
+      <textarea class="form-control" cols="40" id="id_winfo" maxlength="255" name="winfo" rows="4" placeholder="Description"></textarea>
+    </div>
+  </div>
 </form>
+<br>
+<br>
+
 {% endblock %}

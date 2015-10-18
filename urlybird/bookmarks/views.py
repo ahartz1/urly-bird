@@ -21,7 +21,8 @@ class WormListView(generic.ListView):
 
     def get_queryset(self):
         self.form = WormForm()
-        return Worm.objects.all().order_by('-timestamp')
+        return Worm.objects.all().order_by('-timestamp') \
+            .prefetch_related('user')
 
 
 class BirdListView(generic.ListView):
@@ -32,7 +33,8 @@ class BirdListView(generic.ListView):
     def get_queryset(self):
         self.form = WormForm()
         self.user = get_object_or_404(User, pk=self.kwargs['pk'])
-        return self.user.worm_set.all().order_by('-timestamp')
+        return self.user.worm_set.all().order_by('-timestamp') \
+            .prefetch_related('user').prefetch_related('click')
 
 
 class ClickListView(generic.ListView):
@@ -48,7 +50,8 @@ class ClickListView(generic.ListView):
 
     def get_queryset(self):
         return Click.objects.filter(worm=Worm.objects.get(
-            pk=self.kwargs['pk'])).order_by('-timestamp')
+            pk=self.kwargs['pk'])).order_by('-timestamp') \
+            .prefetch_related('worm', 'user')
 
 
 def add_worm(request):

@@ -11,6 +11,7 @@ class UserForm(forms.ModelForm):
         fields = ['username', 'email', 'password', 'first_name', 'last_name']
 
 class WormForm(forms.ModelForm):
+
     class Meta:
         model = Worm
         fields = ['flink', 'wtitle', 'winfo']
