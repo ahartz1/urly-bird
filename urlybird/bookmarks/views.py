@@ -226,4 +226,5 @@ def edit_worm(request, worm_id):
                              'by field')
     return render(request,
                   'bookmarks/edit_worm.html', {'worm_id': worm_id,
+                                               'worm': worm,
                                                'form': form})
