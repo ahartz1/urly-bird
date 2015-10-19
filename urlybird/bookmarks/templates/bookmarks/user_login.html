@@ -1,4 +1,5 @@
 {% extends "base.html" %}
+{% load bootstrap3 %}
 
 {% block title %}User Login Form{% endblock %}
 
@@ -6,16 +7,27 @@
 
   <h2>Login</h2>
 
-  {% if error_message %}<h3>{{ error_message }}</h3>{% endif %}
-
 <form method="POST" action="{% url 'user_login' %}">
   {% csrf_token %}
-  Username: <input type="text" name="username" value="{{ username }}">
-  <br>
-  Password: <input type="password" name="password" value="{{ password }}">
-  <br>
 
-  <input type="submit" value="Login" class="btn btn-default">
+  <div class="row">
+    <div class="col-md-3">
+      <input class="form-control" type="text" value="{{ username }}" cols="30" id="id_username" maxlength="30" name="username" rows="1" placeholder="Username"></input>
+    </div>
+  </div>
+  <br>
+  <div class="row">
+    <div class="col-md-3">
+      <input class="form-control" type="password" value="{{ password }}" cols="30" id="id_password" maxlength="30" name="password" rows="1" placeholder="Password"></input>
+    </div>
+  </div>
+  <br>
+  <div class="row">
+    <div class="col-md-3">
+      <input type="submit" class="btn btn-md btn-primary" value="Login">
+    </div>
+  </div>
+
 </form>
 
 {% endblock %}
