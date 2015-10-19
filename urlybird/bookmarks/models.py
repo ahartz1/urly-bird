@@ -18,6 +18,9 @@ class Worm(models.Model):
         self.flink = self.flink.strip()
         super(Worm, self).save()
 
+    def __str__(self):
+        return self.slink
+
 
 class Click(models.Model):
     user = models.ForeignKey(User, null=True, blank=True)
@@ -28,3 +31,6 @@ class Click(models.Model):
         super(Click, self).save()
         self.worm.numclicks = self.worm.click_set.all().count()
         self.worm.save()
+
+    def __str__(self):
+        return str(self.worm)

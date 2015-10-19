@@ -15,7 +15,7 @@ from faker import Faker
 from django.contrib.auth.decorators import login_required
 
 
-# Create your views here.
+# View-Related
 
 class WormListView(generic.ListView):
     template_name = 'bookmarks/recent_worms.html'
@@ -104,6 +104,35 @@ class ClickListView(generic.ListView):
             .prefetch_related('worm', 'user')
 
 
+# Graph-Related
+
+class LineChartJSONView(BaseLineChartView):
+
+    def get_labels(self):
+        """Return 7 labels."""
+        return ["January", "February", "March", "April", "May", "June", "July"]
+
+    def get_data(self):
+        """Return 3 dataset to plot."""
+
+        return [[75, 44, 92, 11, 44, 95, 35],
+                [41, 92, 18, 3, 73, 87, 92],
+                [87, 21, 94, 3, 90, 13, 65]]
+
+    def get_context_data(self, **kwargs):
+        context = super(BaseLineChartView, self).get_context_data(**kwargs)
+        context['worm'] = Worm.objects.get(pk=self.kwargs['pk'])
+        context['clicks'] = Click.objects.filter(worm=Worm.objects.get(
+            pk=self.kwargs['pk'])).order_by('-timestamp') \
+            .prefetch_related('worm', 'user')
+        return context
+
+line_chart = TemplateView.as_view(template_name='click_list.html')
+line_chart_json = LineChartJSONView.as_view()
+
+
+# Worm-Related
+
 def add_worm(request):
     if request.method == 'POST':
         form = WormForm(request.POST)
@@ -176,26 +205,6 @@ def redirect_slink(request, slink):
         click.user = request.user
     click.save()
     return redirect(worm.flink.strip())
-
-
-# Graph-Related
-
-class LineChartJSONView(BaseLineChartView):
-
-    def get_labels(self):
-        """Return 7 labels."""
-        return ["January", "February", "March", "April", "May", "June", "July"]
-
-    def get_data(self):
-        """Return 3 dataset to plot."""
-
-        return [[75, 44, 92, 11, 44, 95, 35],
-                [41, 92, 18, 3, 73, 87, 92],
-                [87, 21, 94, 3, 90, 13, 65]]
-
-
-line_chart = TemplateView.as_view(template_name='click_list.html')
-line_chart_json = LineChartJSONView.as_view()
 
 
 # Authentication-Related Items: Login, Register, Logout

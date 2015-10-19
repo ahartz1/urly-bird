@@ -42,7 +42,7 @@
       <canvas id="myChart" width="30%" height="218"></canvas>
 
         <script type="text/javascript">
-            $.get('{% url "line_chart_json" %}', function(data) {
+            $.get('{% url "line_chart_json" worm.pk %}', function(data) {
                 var ctx = $("#myChart").get(0).getContext("2d");
                 new Chart(ctx).Line(data);
             });
