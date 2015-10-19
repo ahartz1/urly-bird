@@ -27,6 +27,8 @@ $ python manage.py updatenumclicks
 
 * **Running the site** requires more command line. Navigate to `urly-bird/urlybird` and enter `python manage.py runserver` This will take over the current command-line program's window until you stop the server. Kill the process by pressing `Ctrl+C` or quitting the command-line program entirely.
 
+## About This Site
+
 ### Recent Worms
 Located at `localhost/`, where `localhost` is the location of your Django server. Shows all worms on the site, arranged by creation/modification date.
 
