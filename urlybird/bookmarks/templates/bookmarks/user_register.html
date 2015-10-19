@@ -6,7 +6,37 @@
 
   <form method="POST" action="{% url 'user_register' %}">
     {% csrf_token %}
-    {{ form.as_p }}
-    <input type="submit" value="Register" class="btn btn-default">
+    <div class="row">
+    <div class="col-md-4">
+      <textarea class="form-control" cols="40" id="id_wtitle" maxlength="50" name="username" rows="1" placeholder="Username"></textarea>
+    </div><br><br>
+    </div>
+    <div class="row">
+      <div class="col-md-4">
+      <textarea class="form-control" cols="40" id="id_wtitle" maxlength="50" name="email" rows="1" placeholder="Email"></textarea>
+    </div><br><br>
+    </div>
+    <div class="row">
+    <div class="col-md-4">
+      <textarea class="form-control" cols="40" id="id_wtitle" maxlength="50" name="first_name" rows="1" placeholder="First Name"></textarea>
+    </div><br><br>
+    </div>
+      <div class="row">
+      <div class="col-md-4">
+      <textarea class="form-control" cols="40" id="id_wtitle" maxlength="50" name="last_name" rows="1" placeholder="Last Name"></textarea>
+    </div><br><br>
+    </div>
+    <div class="row">
+    <div class="col-md-4">
+      <textarea class="form-control" cols="40" id="id_wtitle" maxlength="50" name="password" rows="1" placeholder="Password"></textarea>
+
+
+
+
+      <br>
+      <input type="submit" class="btn btn-md btn-primary" value="&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Register!&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;">
+    </div>
+  </div>
+
   </form>
 {% endblock %}
