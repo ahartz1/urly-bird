@@ -39,6 +39,9 @@ Located at `localhost/pop30`, where `localhost` is the location of your Django s
 ### Most Popular Worms – All-Time
 Located at `localhost/popall`, where `localhost` is the location of your Django server. Shows all worms on the site, arranged by number of clicks.
 
+### Most Popular Birds – All-Time
+Located at `localhost/popbirds`, where `localhost` is the location of your Django server. Shows all birds on the site, arranged by number of clicks over their entire worm collection.
+
 
 ### Bird Pages
 Users on this site are referred to as "birds." Located at `localhost/birds/bird_id`, where `localhost` is the location of your django server and `bird_id` is the user_id. These are more easily accessed through the interface by logging in (to see your own bird page) or by clicking on another bird's name.
