@@ -36,8 +36,9 @@
             <a href="{% url 'recent_worms' %}" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false"> Worm Stats <span class="caret"></span></a>
             <ul class="dropdown-menu" role="menu">
               <li><a href="{% url 'recent_worms' %}">Recent Worms</a></li>
-              <li><a href="{% url 'popall_worms' %}">Most Popular Worms – All-Time</a></li>
-              <li><a href="{% url 'pop30_worms' %}">Most Popular Worms – Last 30 Days</a></li>
+              <li><a href="{% url 'popall_worms' %}">Most Popular Worms - All-Time</a></li>
+              <li><a href="{% url 'pop30_worms' %}">Most Popular Worms - Last 30 Days</a></li>
+              <li><a href="{% url 'top_birds' %}">Most Popular Birds - All-Time</a></li>
             </ul>
           </li>
 
@@ -46,7 +47,7 @@
           <li class="dropdown">
           <a href="{% url 'bird_list' user.pk %}" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false"> {{ user.username }} <span class="caret"></span></a>
           <ul class="dropdown-menu" role="menu">
-            <li><a href="{% url 'bird_list' user.pk %}">{{ user.username }}'s Worms by Date</a></li>
+            <li><a href="{% url 'bird_list' user.pk %}"><small><span class="glyphicon glyphicon-bookmark"></span></small>  {{ user.username }}'s Worms by Date</a></li>
             <li><a href="{% url 'bird_pop_list' user.pk %}">{{ user.username }}'s Worms by Popularity</a></li>
           </ul>
         </li>

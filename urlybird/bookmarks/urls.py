@@ -22,6 +22,8 @@ urlpatterns = [
 
     url(r'^pop30$', bviews.Pop30ListView.as_view(), name='pop30_worms'),
 
+    url(r'^popbirds$', bviews.TopBirdsListView.as_view(), name='top_birds'),
+
     url(r'^$', bviews.WormListView.as_view(), name='recent_worms'),
 
     url(r'^(?P<slink>[A-Za-z0-9]{7})$',
