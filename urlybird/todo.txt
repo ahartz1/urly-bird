@@ -1,21 +1,17 @@
 Unassigned:
-- revise nav bar
-- my worms / my stats
 
 
 Like to have:
-- blue nav bar
-- graphs
-- glyph bookmark?
-- table of users by popularity (most click over all links)
 
 
 Adam:
-- can of worms
-  - last 30 days most clicks
-  - all time most clicks
+- graphs
+- consolidate templates
+
 
 Tyler:
+- glyph bookmark in user's navbar options
+- table of users by popularity (most click over all links)
 
 
 Completed:
@@ -34,8 +30,12 @@ Completed:
 √ set up url regex and function to link slink to flink
 √ add list of clicks Worm detail view (only for auth user)
 √ revise WLV & WDV templates (BLV later)
-
-
+√ can of worms
+  √ last 30 days most clicks
+  √ all time most clicks
+√ revise nav bar
+√ my worms / my stats
+√ blue nav bar
 
 Layout of tables:
 Top row: slink, wtitle

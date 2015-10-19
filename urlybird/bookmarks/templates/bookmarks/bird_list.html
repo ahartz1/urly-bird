@@ -5,44 +5,50 @@
 <body>
 
 {% if worms %}
-<h2>{{ view.user.username }}'s Worms by Date</h2>
+  <h2>{{ view.user.username }}'s Worms by Date</h2>
 
-<table class="table table-striped">
-<tr>
-  <th>Inch Worm</th>
-  <th></th>
-  <th>Title</th>
-  <th>Bird</th>
-  <th>Date</th>
-  <th></th>
-</tr>
-{% for worm in worms %}
+  <table class="table table-striped">
   <tr>
-    <td><b><a href="{% url 'redirect_slink' worm.slink %}">{{ worm.slink|ljust:10 }}</a></b></td>
-    <td><a href="{% url 'click_list' worm.pk %}"><span class="glyphicon glyphicon-info-sign"></span></a>
-      {% if user == view.user %}
-        <a href="{% url 'edit_worm' worm.pk %}"><span class="glyphicon glyphicon-pencil"></span></a>
-      {% endif %}
-    </td>
-    <td>{{ worm.wtitle|truncatechars:50 }}</td>
-    {% if worm.user %}
-      <td><a href="{% url 'bird_list' worm.user.pk %}">{{ worm.user }}</a></td>
-    {% else %}
-      <td>anonymous</td>
-    {% endif %}
-    <td><small>{{ worm.timestamp }} ({{ worm.timestamp | timesince }} ago)</small></td>
-    {% if user == view.user %}
-    <td><a href="{% url 'delete_worm' worm.pk %}"><span class="glyphicon glyphicon-trash"></span></a></td>
-    {% endif %}
+    <th>Inch Worm</th>
+    <th></th>
+    <th>Title</th>
+    <th>Bird</th>
+    <th>Date Created/Modified</th>
+    <th>Clicks</th>
+    <th></th>
   </tr>
-{% endfor %}
-</table>
+  {% for worm in worms %}
+    <tr>
+      <td><b><a href="{% url 'redirect_slink' worm.slink %}">{{ worm.slink|ljust:10 }}</a></b></td>
+      <td><a href="{% url 'click_list' worm.pk %}"><span class="glyphicon glyphicon-info-sign"></span></a>
+        {% if user == view.user %}
+          <a href="{% url 'edit_worm' worm.pk %}"><span class="glyphicon glyphicon-pencil"></span></a>
+        {% endif %}
+      </td>
+      <td>{{ worm.wtitle|truncatechars:50 }}</td>
+      {% if worm.user %}
+        <td><a href="{% url 'bird_list' worm.user.pk %}">{{ worm.user }}</a></td>
+      {% else %}
+        <td>anonymous</td>
+      {% endif %}
+      <td><small>{{ worm.timestamp }} ({{ worm.timestamp | timesince }} ago)</small></td>
+      <td>{{ worm.numclicks }}</td>
+      {% if user == view.user %}
+      <td><a href="{% url 'delete_worm' worm.pk %}"><span class="glyphicon glyphicon-trash"></span></a></td>
+      {% endif %}
+    </tr>
+  {% endfor %}
+  </table>
 
-<div class="text-center">
-  {% bootstrap_pagination page_obj pages_to_show=5 %}
-</div>
+  {% if worms|length > 25 %}
+    <div class="text-center">
+      {% bootstrap_pagination page_obj pages_to_show=5 %}
+    </div>
+  {% endif %}
+
 {% else %}
-<h2>{{ view.user.username }}</h2>
-<h4>You don't have any worms yet.<h4>
+  <h2>{{ view.user.username }}</h2>
+  <h4>You don't have any worms yet.<h4>
 {% endif %}
+
 {% endblock %}
