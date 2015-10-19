@@ -1,0 +1,66 @@
+{% load staticfiles %}
+<!DOCTYPE html>
+{% load bootstrap3 %}
+{% load bootstrap_themes %}
+{% bootstrap_styles theme='paper' type='min.css' %}
+{% bootstrap_css %}
+{% bootstrap_javascript jquery=True %}
+
+<html lang="en">
+
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>{% block title %}URLy Bird{% endblock %}</title>
+  <link rel="stylesheet" type="text/css" href="{% static 'style2.css' %}" />
+</head>
+<body>
+
+
+
+  <div class="site-wrapper">
+
+        <div class="site-wrapper-inner">
+
+          <div class="cover-container">
+
+            <div class="masthead clearfix">
+              <div class="inner">
+                <h3 class="masthead-brand">URLy Bird</h3>
+                <nav>
+                  <ul class="nav masthead-nav">
+                  {% if user.is_authenticated %}
+                    <li><a href="{% url 'bird_list' user.pk %}">{{ user.username }}</a></li>
+                    <li><a href="{% url 'user_logout' %}">Logout</a></li>
+                  {% else %}
+                    <li><a href="{% url 'user_login' %}">Login</a></li>
+                    <li><a href="{% url 'user_register' %}">Register</a></li>
+                  {% endif %}
+                  </ul>
+                </nav>
+              </div>
+            </div>
+
+            <div class="inner cover">
+              <h1 class="cover-heading">Catch a worm.</h1>
+              <br>
+              <p class="lead">Welcome to URLy bird! <br> URLy Bird is the one-stop shop <br> for all your URL shortening and tracking needs.<br> We take your hard-to-remember URLs <br> and return an easy to use "worm." <br> Click below to get started. </p>
+              <p class="lead">
+                <br>
+                <a href="{% url 'recent_worms' %}" class="btn btn-lg btn-default">Get Started</a>
+              </p>
+            </div>
+
+
+
+
+</body>
+<footer>
+<div class="mastfoot">
+            <div class="pull-right">
+              <p><small>&copy;2015 Adam Hartz and Tyler Kotkin</small></p>
+            </div>
+          </div>
+</footer>
+</html>
