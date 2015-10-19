@@ -24,7 +24,7 @@
           <br>
           <small> {{worm.timestamp}} - {{worm.timestamp | timesince}} ago&nbsp;&nbsp;
             {% if user.pk == worm.user_id %}
-              <a href="{% url 'edit_worm' worm.pk %}"><span class="glyphicon glyphicon-pencil"></span></a> |
+              <a href="{% url 'edit_worm' worm.pk %}"><span class="glyphicon glyphicon-pencil"></span></a> &nbsp;
               <a href="{% url 'delete_worm' worm.pk %}"><span class="glyphicon glyphicon-trash"></span></a>
             {% endif %}</small>
           </p>
@@ -44,7 +44,7 @@
   <tr>
     <td>{{ click.timestamp }} ({{ click.timestamp | timesince }} ago)</td>
     {% if click.user %}
-    <td><b><a href="{% url 'bird_list' click.user.pk %}">{{ click.user }}</a></b></td>
+    <td><a href="{% url 'bird_list' click.user.pk %}">{{ click.user }}</a></td>
     {% else %}
     <td>anonymous</td>
     {% endif %}
