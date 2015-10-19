@@ -119,15 +119,15 @@ class LineChartJSONView(BaseLineChartView):
                 [41, 92, 18, 3, 73, 87, 92],
                 [87, 21, 94, 3, 90, 13, 65]]
 
-    def get_context_data(self, **kwargs):
-        context = super(BaseLineChartView, self).get_context_data(**kwargs)
-        context['worm'] = Worm.objects.get(pk=self.kwargs['pk'])
-        context['clicks'] = Click.objects.filter(worm=Worm.objects.get(
-            pk=self.kwargs['pk'])).order_by('-timestamp') \
-            .prefetch_related('worm', 'user')
-        return context
+    # def get_context_data(self, **kwargs):
+    #     context = super(BaseLineChartView, self).get_context_data(**kwargs)
+    #     context['worm'] = Worm.objects.get(pk=self.kwargs['pk'])
+    #     context['clicks'] = Click.objects.filter(worm=Worm.objects.get(
+    #         pk=self.kwargs['pk'])).order_by('-timestamp') \
+    #         .prefetch_related('worm', 'user')
+    #     return context
 
-line_chart = TemplateView.as_view(template_name='click_list.html')
+line_chart = TemplateView.as_view(template_name='line_chart.html')
 line_chart_json = LineChartJSONView.as_view()
 
 

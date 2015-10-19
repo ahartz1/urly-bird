@@ -33,4 +33,4 @@ class Click(models.Model):
         self.worm.save()
 
     def __str__(self):
-        return str(self.worm)
+        return '{} at {}'.format(self.worm, self.timestamp)
