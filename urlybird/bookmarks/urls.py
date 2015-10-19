@@ -24,7 +24,9 @@ urlpatterns = [
 
     url(r'^popbirds$', bviews.TopBirdsListView.as_view(), name='top_birds'),
 
-    url(r'^$', bviews.WormListView.as_view(), name='recent_worms'),
+    url(r'^recent$', bviews.WormListView.as_view(), name='recent_worms'),
+
+    url(r'^$', bviews.home, name='home'),
 
     url(r'^(?P<slink>[A-Za-z0-9]{7})$',
         bviews.redirect_slink, name='redirect_slink')

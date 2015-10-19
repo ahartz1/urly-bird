@@ -101,6 +101,10 @@ class ClickListView(generic.ListView):
             .prefetch_related('worm', 'user')
 
 
+def home(request):
+    return render(request, 'bookmarks/home.html')
+
+
 def add_worm(request):
     if request.method == 'POST':
         form = WormForm(request.POST)
