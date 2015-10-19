@@ -1,6 +1,7 @@
 Django
 django-bootstrap3
 django-bootstrap-themes
+django-chartjs
 django-debug-toolbar
 django-extensions
 fake-factory

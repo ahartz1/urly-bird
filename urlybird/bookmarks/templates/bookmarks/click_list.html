@@ -1,5 +1,11 @@
 {% extends "base.html" %}
 {% load bootstrap3 %}
+
+{% block head %}
+  <script type="text/javascript" src="http://code.jquery.com/jquery-1.10.0.min.js"></script>
+  <script type="text/javascript" src="{% static 'js/Chart.min.js' %}"></script>
+{% endblock %}
+
 {% block content %}
 
 <body>
@@ -34,8 +40,6 @@
     <div class="col-md-4">
       <canvas id="myChart" width="30%" height="218"></canvas>
 
-        <script type="text/javascript" src="http://code.jquery.com/jquery-1.10.0.min.js"></script>
-        <script type="text/javascript" src="{% static 'js/Chart.min.js' %}"></script>
         <script type="text/javascript">
             $.get('{% url "line_chart_json" %}', function(data) {
                 var ctx = $("#myChart").get(0).getContext("2d");
