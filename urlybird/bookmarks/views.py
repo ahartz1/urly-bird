@@ -1,3 +1,4 @@
+from chartjs.views.lines import BaseLineChartView
 from datetime import datetime, timedelta
 from django.contrib import messages
 from django.contrib.auth import authenticate, login, logout
@@ -8,6 +9,7 @@ from django.utils.timezone import make_aware
 from urlybird.forms import UserForm, WormForm
 from django.db.models import Count
 from django.views import generic
+from django.views.generic import TemplateView
 from .models import Worm, Click
 from faker import Faker
 from django.contrib.auth.decorators import login_required
@@ -55,7 +57,8 @@ class TopBirdsListView(generic.ListView):
 
     def get_queryset(self):
         self.form = WormForm()
-        return User.objects.annotate(bird_clicks=Count('click')).order_by('-bird_clicks')
+        return User.objects.annotate(bird_clicks=Count('click')) \
+            .order_by('-bird_clicks')
 
 
 class BirdListView(generic.ListView):
@@ -131,6 +134,41 @@ def add_worm(request):
     return redirect(request.GET['next'])
 
 
+@login_required
+def delete_worm(request, worm_id):
+    if Worm.objects.get(pk=worm_id).user == request.user:
+        Worm.objects.get(pk=worm_id).delete()
+        messages.add_message(request, messages.SUCCESS, "Worm removed")
+        return redirect('bird_list', pk=request.user.pk)
+    else:
+        messages.add_message(
+            request, messages.ERROR, "You do not have access")
+        return redirect('recent_worms')
+
+
+@login_required
+def edit_worm(request, worm_id):
+    worm = get_object_or_404(Worm, pk=worm_id)
+    if request.method == 'GET':
+        form = WormForm(instance=worm)
+    elif request.method == 'POST':
+        form = WormForm(instance=worm, data=request.POST)
+        if form.is_valid():
+            worm = form.save(commit=False)
+            worm.timestamp = datetime.now()
+            worm.save()
+            messages.add_message(request, messages.SUCCESS,
+                                 'Updated worm')
+            return redirect('click_list', pk=worm_id)
+        messages.add_message(request,
+                             messages.ERROR,
+                             'Form data invalid'
+                             'by field')
+    return render(request,
+                  'bookmarks/edit_worm.html', {'worm_id': worm_id,
+                                               'form': form})
+
+
 def redirect_slink(request, slink):
     worm = get_object_or_404(Worm, slink=slink)
     click = Click(worm=worm, timestamp=make_aware(datetime.now()))
@@ -139,6 +177,28 @@ def redirect_slink(request, slink):
     click.save()
     return redirect(worm.flink.strip())
 
+
+# Graph-Related
+
+class LineChartJSONView(BaseLineChartView):
+
+    def get_labels(self):
+        """Return 7 labels."""
+        return ["January", "February", "March", "April", "May", "June", "July"]
+
+    def get_data(self):
+        """Return 3 dataset to plot."""
+
+        return [[75, 44, 92, 11, 44, 95, 35],
+                [41, 92, 18, 3, 73, 87, 92],
+                [87, 21, 94, 3, 90, 13, 65]]
+
+
+line_chart = TemplateView.as_view(template_name='line_chart.html')
+line_chart_json = LineChartJSONView.as_view()
+
+
+# Authentication-Related Items: Login, Register, Logout
 
 def user_login(request):
     if request.method == 'POST':
@@ -188,38 +248,3 @@ def user_logout(request):
                              "{}, you have successfully logged out".format(
                                  user_name))
         return redirect('/')
-
-
-@login_required
-def delete_worm(request, worm_id):
-    if Worm.objects.get(pk=worm_id).user == request.user:
-        Worm.objects.get(pk=worm_id).delete()
-        messages.add_message(request, messages.SUCCESS, "Worm removed")
-        return redirect('bird_list', pk=request.user.pk)
-    else:
-        messages.add_message(
-            request, messages.ERROR, "You do not have access")
-        return redirect('recent_worms')
-
-
-@login_required
-def edit_worm(request, worm_id):
-    worm = get_object_or_404(Worm, pk=worm_id)
-    if request.method == 'GET':
-        form = WormForm(instance=worm)
-    elif request.method == 'POST':
-        form = WormForm(instance=worm, data=request.POST)
-        if form.is_valid():
-            worm = form.save(commit=False)
-            worm.timestamp = datetime.now()
-            worm.save()
-            messages.add_message(request, messages.SUCCESS,
-                                 'Updated worm')
-            return redirect('click_list', pk=worm_id)
-        messages.add_message(request,
-                             messages.ERROR,
-                             'Form data invalid'
-                             'by field')
-    return render(request,
-                  'bookmarks/edit_worm.html', {'worm_id': worm_id,
-                                               'form': form})
