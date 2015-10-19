@@ -27,5 +27,8 @@ urlpatterns = [
     url(r'^$', bviews.WormListView.as_view(), name='recent_worms'),
 
     url(r'^(?P<slink>[A-Za-z0-9]{7})$',
-        bviews.redirect_slink, name='redirect_slink')
+        bviews.redirect_slink, name='redirect_slink'),
+
+    url(r'^birds/pop/graph$',
+        bviews.LineChartJSONView.as_view(), name='line_chart_json'),
 ]
